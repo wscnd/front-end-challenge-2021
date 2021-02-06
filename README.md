@@ -104,11 +104,12 @@ Além do desafio proposto com as duas telas, temos alguns diferenciais:
 ## Finalização e Instruções para a Apresentação
 
 Avisar sobre a finalização e enviar para correção em: 
-1. Faça o commit final em seu challenge
-2. Acesse: [https://coodesh.com/review-challenge](https://coodesh.com/review-challenge)
-3. Coloque seu nome completo 
-4. Coloque seu e-mail
-5. Adicione o repositório
+1. Responder ao scorecard: https://bit.ly/3amnRmI 
+2.Faça o commit final em seu challenge
+3. Acesse: [https://coodesh.com/review-challenge](https://coodesh.com/review-challenge)
+4. Coloque seu nome completo 
+5. Coloque seu e-mail
+6. Adicione o repositório
 
 ![Solicitar Correção](https://res.cloudinary.com/coodesh/image/upload/v1612571243/coodesh-teams/challenges/repo.gif)
 
