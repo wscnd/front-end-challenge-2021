@@ -8,6 +8,8 @@ O objetivo é avaliar a sua forma de estruturação e autonomia em decisões par
 
 Você está libre para usar React.js ou Vue.js ou Angular 8+ no desenvolvimento da solução deste tech challenge.
 
+[SPOILER] As intruções de entrega e apresentação do challenge estão no final deste Readme (=
+
 ## Case
 
 A empresa Pharma Inc, está trabalhando em um projeto em colaboração com sua base de clientes para facilitar a gestão e visualização da informação dos seus pacientes de maneira simples e objetiva em um Dashboard onde podem listar, filtrar e expandir os dados disponíveis.
@@ -121,13 +123,10 @@ Avisar sobre a finalização e enviar para correção.
 
 ## Instruções para se preparar para a Apresentação:
 
-1. Crie uma conta na plataforma: https://www.loom.com/ 
-2. Instale o Desktop App ou Extensão no Chrome: https://www.loom.com/download 
-3. Será necessário compartilhar a tela durante a gravação ou vídeo chamada;
-4. Deixe todos os projetos de solução previamente abertos em seu computador antes de iniciar a gravação ou chamanda de vídeo;
-5. Deixe os ambientes configurados e prontos para rodar;
-6. Prepara-se pois você será questionado sobre cada etapa e decisão do Challenge;
-7. Prepare uma lista de perguntas, dúvidas, sugestões de melhorias e feedbacks (caso tenha).
+1. Aguarde o e-mail com as instruções de apresentação 
+2. Enquanto isso, crie uma conta na plataforma: https://www.loom.com/ e instale o Desktop App ou Extensão no Chrome: https://www.loom.com/download 
+3. DICA: Será necessário compartilhar a tela durante a gravação ou vídeo chamada. Deixe todos os projetos de solução previamente abertos em seu computador antes de iniciar a gravação ou chamanda de vídeo. Ambientes configurados e prontos para rodar.
+4. Prepara-se pois você será questionado sobre cada etapa e decisão do Challenge. Prepare uma lista de perguntas, dúvidas, sugestões de melhorias e feedbacks (caso tenha).
 
 ## Suporte
 
