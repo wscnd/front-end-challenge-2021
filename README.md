@@ -1,6 +1,5 @@
 # Front-End Challenge 🏅 2021
 
-
 ## Introdução
 
 Este é um desafio para testar seus conhecimentos de Front-end;
@@ -90,13 +89,14 @@ Além do desafio proposto com as duas telas, temos alguns diferenciais:
 - **Diferencial 1** Adicionar um filtro por Gênero na tabela;
 - **Diferencial 2** Configurar o buscador para poder filtrar por nome e nacionalidade;
 - **Diferencial 3** Adicionar o paginador rota para facilitar compartilhar o link e manter a posição na lista;
-- **Diferencial 4** Escrever Unit tests da lista de pacientes;
+- **Diferencial 4** Escrever Unit Tests ou E2E Test na Lista de Pacientes. Escolher a melhor abordagem e biblioteca;
 - **Diferencial 5** Configurar Docker no Projeto para facilitar o Deploy da equipe de DevOps;
 
 ## Readme do Repositório
 
 - Deve conter o título do projeto
-- Uma descrição em frase
+- Uma descrição sobre o proejto em frase
+- Deve conter 
 - Como instalar e usar o projeto (instruções)
 - Não esqueça o [.gitignore](https://www.toptal.com/developers/gitignore)
 - Se está usando github pessoal, referencie que é um challenge by coodesh 
@@ -105,16 +105,17 @@ Além do desafio proposto com as duas telas, temos alguns diferenciais:
 
 Avisar sobre a finalização e enviar para correção.
 
-1. Responder ao scorecard: https://bit.ly/3amnRmI 
-2. Faça o commit final em seu challenge
-3. Acesse: [https://coodesh.com/review-challenge](https://coodesh.com/review-challenge)
-4. Coloque seu nome completo 
-5. Coloque seu e-mail
-6. Adicione o repositório
+1. Confira se respondeu o Scorecard Front-end: http://bit.ly/3rmWAsa;
+2. Verique se o Readme está bom e faça o commit final em seu repositório;
+3. Acesse: [https://coodesh.com/review-challenge](https://coodesh.com/review-challenge);
+4. Coloque seu nome completo; 
+5. Coloque seu e-mail;
+6. Adicione o repositório com a sua solução;
+7. Confira a vaga desejada;
 
 ![Solicitar Correção](https://res.cloudinary.com/coodesh/image/upload/v1612571243/coodesh-teams/challenges/repo.gif)
 
-5. Envie e aguarde as instruções para apresentação da sua solução
+8. Envie e aguarde as instruções para apresentação da sua solução
 
 ## Instruções para se preparar para a Apresentação:
 
