@@ -109,7 +109,7 @@ Além do desafio proposto com as duas telas, temos alguns diferenciais:
 
 Avisar sobre a finalização e enviar para correção.
 
-1. Confira se respondeu o Scorecard Front-end: http://bit.ly/3rmWAsa;
+1. Confira se respondeu o Scorecard Front-end;
 2. Verique se o Readme está bom e faça o commit final em seu repositório;
 3. Acesse: [https://coodesh.com/review-challenge](https://coodesh.com/review-challenge);
 4. Coloque seu nome completo; 
