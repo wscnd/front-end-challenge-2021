@@ -6,7 +6,7 @@ Este é um desafio para testar seus conhecimentos de Front-end;
 
 O objetivo é avaliar a sua forma de estruturação e autonomia em decisões para construir algo escalável utilizando um framework moderno javascript.
 
-Você está libre para usar React.js ou Vue.js ou Angular 8+ no desenvolvimento da solução deste tech challenge.
+Você está livre para usar React.js ou Vue.js ou Angular 8+ no desenvolvimento da solução deste tech challenge.
 
 [SPOILER] As intruções de entrega e apresentação do challenge estão no final deste Readme (=
 
