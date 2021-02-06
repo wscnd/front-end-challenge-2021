@@ -6,6 +6,8 @@ Este é um desafio para testar seus conhecimentos de Front-end;
 
 O objetivo é avaliar a sua forma de estruturação e autonomia em decisões para construir algo escalável utilizando um framework moderno javascript.
 
+Você está libre para usar React.js ou Vue.js ou Angular 8+ no desenvolvimento da solução deste tech challenge.
+
 ## Case
 
 A empresa Pharma Inc, está trabalhando em um projeto em colaboração com sua base de clientes para facilitar a gestão e visualização da informação dos seus pacientes de maneira simples e objetiva em um Dashboard onde podem listar, filtrar e expandir os dados disponíveis.
