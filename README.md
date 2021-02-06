@@ -99,7 +99,7 @@ Além do desafio proposto com as duas telas, temos alguns diferenciais:
 ## Readme do Repositório
 
 - Deve conter o título do projeto
-- Uma descrição sobre o proejto em frase
+- Uma descrição sobre o projeto em frase
 - Deve conter 
 - Como instalar e usar o projeto (instruções)
 - Não esqueça o [.gitignore](https://www.toptal.com/developers/gitignore)
