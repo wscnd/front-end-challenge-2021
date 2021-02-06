@@ -103,9 +103,10 @@ Além do desafio proposto com as duas telas, temos alguns diferenciais:
 
 ## Finalização e Instruções para a Apresentação
 
-Avisar sobre a finalização e enviar para correção em: 
+Avisar sobre a finalização e enviar para correção.
+
 1. Responder ao scorecard: https://bit.ly/3amnRmI 
-2.Faça o commit final em seu challenge
+2. Faça o commit final em seu challenge
 3. Acesse: [https://coodesh.com/review-challenge](https://coodesh.com/review-challenge)
 4. Coloque seu nome completo 
 5. Coloque seu e-mail
