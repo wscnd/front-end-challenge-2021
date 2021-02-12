@@ -8,7 +8,7 @@ O objetivo é avaliar a sua forma de estruturação e autonomia em decisões par
 
 Você está livre para usar React.js ou Vue.js ou Angular 8+ no desenvolvimento da solução deste tech challenge.
 
-[SPOILER] As intruções de entrega e apresentação do challenge estão no final deste Readme (=
+[SPOILER] As instruções de entrega e apresentação do challenge estão no final deste Readme (=
 
 ## Case
 
