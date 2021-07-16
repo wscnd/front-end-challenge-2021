@@ -1,8 +1,15 @@
 import * as React from 'react';
-import { usePeopleList } from '../hooks/usePeopleList';
+import { usePeopleListWithConfig } from '../hooks/usePeopleList';
 
 const Home = () => {
-  const peopleQuery = usePeopleList();
+  const peopleQuery = usePeopleListWithConfig(
+    {},
+    {
+      params: {
+        results: 30,
+      },
+    },
+  );
 
   return <h1>hello</h1>;
 };
