@@ -1,17 +1,11 @@
 import * as React from 'react';
-import { usePeopleListWithConfig } from '../hooks/usePeopleList';
+import { WithPeopleList } from '../components/WithPeopleList';
+import { PeopleList } from '../components/PeopleList';
 
 const Home = () => {
-  const peopleQuery = usePeopleListWithConfig(
-    {},
-    {
-      params: {
-        results: 30,
-      },
-    },
+  return (
+    <WithPeopleList>{(query) => <PeopleList {...query} />}</WithPeopleList>
   );
-
-  return <h1>hello</h1>;
 };
 
 export { Home };
