@@ -10,10 +10,18 @@ const WithPeopleList: React.FunctionComponent<WithPeopleProp> = ({
   children,
 }) => {
   const peopleQuery = usePeopleListWithConfig(
-    {},
+    {
+      keepPreviousData: true,
+      //eslint-disable-next-line @typescript-eslint/no-unused-vars
+      getNextPageParam: (lastPage, pages) => {
+        // console.log('pages:', pages)
+        return lastPage.info.page + 1;
+      },
+    },
     {
       params: {
-        results: 30,
+        results: 50,
+        page: 30
       },
     },
   );
