@@ -4,6 +4,8 @@ import { PeopleList } from '../components/PeopleList';
 import { SearchIcon } from '@heroicons/react/solid';
 
 const Home = () => {
+  const [search, setSearch] = React.useState('');
+
   return (
     <React.Fragment>
       <div className="mb-8">
@@ -23,12 +25,18 @@ const Home = () => {
             id="search"
             className="block w-full bg-white py-2 pl-6 pr-3 border border-transparent rounded-md leading-5 text-gray-900 placeholder-gray-500 ring-2 ring-offset-2 ring-offset-secondary  ring-transparent focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-primary focus:ring-white focus:border-white sm:text-sm"
             placeholder="Searching"
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
             type="search"
             name="search"
           />
         </div>
       </div>
-      <WithPeopleList>{(query) => <PeopleList {...query} />}</WithPeopleList>
+      <WithPeopleList>
+        {(query) => (
+          <PeopleList search={search} query={query} />
+        )}
+      </WithPeopleList>
     </React.Fragment>
   );
 };
