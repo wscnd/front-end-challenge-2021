@@ -9,18 +9,18 @@ const PeopleList: React.FunctionComponent<UsePersonList> = (query) => {
         {query.isLoading ? (
           <span>loading...</span>
         ) : (
-          <React.Fragment>
+          <ul>
             {!!query.data?.pages.length &&
-              query.data?.pages.map((pages) => (
-                <ul key={pages.info.page}>
+              query.data?.pages.map((pages, index) => (
+                <React.Fragment key={index}>
                   {pages.results.map((person) => (
                     <li key={person.login.username}>
                       {person.name.title} {person.name.first} {person.name.last}
                     </li>
                   ))}
-                </ul>
+                </React.Fragment>
               ))}
-          </React.Fragment>
+          </ul>
         )}
       </section>
       <button onClick={() => query.fetchNextPage()}>fetch more</button>
