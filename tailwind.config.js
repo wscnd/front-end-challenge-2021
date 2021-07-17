@@ -10,10 +10,20 @@ module.exports = {
       fontFamily: {
         sans: ['Inter var', ...defaultTheme.fontFamily.sans],
       },
+      colors: {
+        primary: '#293845',
+        secondary: '#9FAEBB',
+        // secondary: '#C3CFD9',
+        bg: '#F7F9FA',
+        'bg-2': '#DFE6ED',
+      },
     },
   },
   variants: {
     extend: {},
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/typography'),
+    // ...
+  ],
 };
