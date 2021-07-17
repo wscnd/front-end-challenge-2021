@@ -1,7 +1,7 @@
-import { UseQueryOptions } from 'react-query';
-import { Person } from './Person';
+import { UseInfiniteQueryOptions } from 'react-query';
 import { usePeopleListWithConfig } from '../../hooks/usePeopleList';
+import { QueryResult } from './QueryResult';
 
-export type PersonListQueryOptions = UseQueryOptions<Person[]>;
+export type PersonListQueryOptions = UseInfiniteQueryOptions<QueryResult>;
 
 export type UsePersonList = ReturnType<typeof usePeopleListWithConfig>;
