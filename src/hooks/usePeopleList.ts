@@ -4,7 +4,6 @@ import type { Person } from '../lib/types/Person';
 import type { QueryResult } from '../lib/types/QueryResult';
 import { PersonListQueryOptions } from '../lib/types/PersonQuery';
 import { AxiosRequestConfig } from 'axios';
-import { deepMerge } from '../lib/utils/deepMerge';
 
 export const fetchPeople = () => {
   return api.get('').then((response) => response.data.results);
@@ -15,21 +14,19 @@ type FetchPeopleWithOptions = Partial<QueryFunctionContext> & {
 };
 
 export const fetchPeopleWithOptions = ({
-  pageParam = 1,
+  pageParam,
   queryKey,
   fetchOptions,
 }: FetchPeopleWithOptions) => {
+  const newFetchOptions = {
+    ...fetchOptions,
+    params: {
+      ...fetchOptions?.params,
+      page: pageParam || fetchOptions?.params.page,
+    },
+  };
 
-  console.log('queryKey:', queryKey)
-  console.log('fetchOptions:', fetchOptions)
-
-  const newFetchOptions = deepMerge({
-    params: { page: pageParam },
-  }, fetchOptions);
-
-  console.log('newFetchOptions:', newFetchOptions)
-  console.log('queryKey:', queryKey);
-
+  console.log('newFetchOptions:', newFetchOptions);
   return api
     .get<QueryResult>('', newFetchOptions)
     .then((response) => response.data);
@@ -46,7 +43,11 @@ export const usePeopleListWithConfig = (
   return useInfiniteQuery({
     queryKey: ['people'],
     queryFn: ({ queryKey, pageParam }) =>
-      fetchPeopleWithOptions({ fetchOptions, queryKey, pageParam }),
+      fetchPeopleWithOptions({
+        fetchOptions,
+        queryKey,
+        pageParam,
+      }),
     ...queryOptions,
   });
 };
