@@ -12,33 +12,33 @@ const Nav = () => {
     <Disclosure as="nav" className="bg-white">
       {() => (
         <>
-          <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8 py-1">
+          <div className="px-2 py-1 mx-auto max-w-7xl sm:px-6 lg:px-8">
             <div className="relative flex items-center justify-between h-10">
-              <div className="flex-1 flex items-center justify-center sm:items-stretch sm:justify-start">
-                <div className="flex-shrink-0 flex items-center">
+              <div className="flex items-center justify-center flex-1 sm:items-stretch sm:justify-start">
+                <div className="flex items-center flex-shrink-0">
                   <img
-                    className="block lg:hidden h-8 w-auto"
+                    className="block w-auto h-8 lg:hidden"
                     src="/img/logo.png"
                     alt="Logo"
                   />
                   <img
-                    className="hidden lg:block h-8 w-auto"
+                    className="hidden w-auto h-8 lg:block"
                     src="/img/logo.png"
                     alt="Logo"
                   />
                 </div>
-                <span className="my-6 w-full pl-5 font-bold text-xl prose">Company</span>
+                <span className="w-full pl-5 my-6 text-xl font-bold prose">Company</span>
               </div>
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                 {/* Profile dropdown */}
-                <Menu as="div" className="ml-3 relative">
+                <Menu as="div" className="relative ml-3">
                   {({ open }) => (
                     <>
                       <div>
-                        <Menu.Button className="bg-white flex text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
+                        <Menu.Button className="flex text-sm bg-white rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
                           <span className="sr-only">Open user menu</span>
                           <span className="flex p-2 rounded-full bg-bg-2">
-                            <UserIcon className="h-4 w-4 text-secondary" />
+                            <UserIcon className="w-4 h-4 text-secondary" />
                           </span>
                         </Menu.Button>
                       </div>
@@ -54,7 +54,7 @@ const Nav = () => {
                       >
                         <Menu.Items
                           static
-                          className="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none"
+                          className="absolute right-0 w-48 py-1 mt-2 origin-top-right bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
                         >
                           <Menu.Item>
                             {({ active }) => (

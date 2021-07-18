@@ -25,9 +25,9 @@ const ShowLoading: React.FunctionComponent<ShowLoadingProps> = ({
     >
       <div className="flex justify-center text-primary">
         <div className="flex-shrink-0 animate-spin-h">
-          <Icon className="h-8 w-8" aria-hidden="true" />
+          <Icon className="w-8 h-8" aria-hidden="true" />
         </div>
-        <span className="ml-3 prose-lg  font-bold">{text}</span>
+        <span className="ml-3 font-bold prose-lg">{text}</span>
       </div>
     </Transition>
   );

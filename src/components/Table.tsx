@@ -3,14 +3,14 @@ import type { Person } from '../lib/types/Person';
 
 const Table: React.FunctionComponent = ({ children }) => {
   return (
-    <table className="table-fixed text-center w-full border-collapse mb-8">
-      <thead className="text-lg bg-table-bg text-primary">
+    <table className="w-full mb-8 text-center border-collapse table-fixed">
+      <thead className="text-lg border-collapse bg-table-bg text-primary">
         <tr>
-          <th className="border-2 border-secondary w-1/3">Name</th>
-          <th className="border-2 border-secondary w-1/6">Gender</th>
-          <th className="border-2 border-secondary w-1/6">Birth</th>
-          <th className="border-2 border-secondary w-1/3" colSpan={2}>
-            Actions
+          <th className="w-1/3 border-2 border-secondary">Name</th>
+          <th className="w-1/6 border-2 border-secondary">Gender</th>
+          <th className="w-1/6 border-2 border-secondary">Birth</th>
+          <th className="w-1/3 border-2 border-secondary" colSpan={2}>
+          Actions
           </th>
         </tr>
       </thead>
@@ -25,7 +25,10 @@ const TableBody: React.FunctionComponent<{
   return (
     <React.Fragment>
       {personList.map((person) => (
-        <tr key={person.login.uuid.slice(0, 6)} className="h-10 bg-white">
+        <tr
+          key={person.login.uuid.slice(0, 6)}
+          className="h-10 bg-white hover:bg-gray-200 hover:cursor-pointer"
+        >
           <td className="border-2 border-secondary ">
             {person.name.first} {person.name.last}
           </td>
@@ -33,8 +36,8 @@ const TableBody: React.FunctionComponent<{
           <td className="border-2 border-secondary">
             {new Date(person.dob.date).toLocaleDateString()}
           </td>
-          <td className="border-2  border-secondary">View</td>
-          <td className="border-2  border-secondary">Edit</td>
+          <td className="border-2 border-secondary">View</td>
+          <td className="border-2 border-secondary">Edit</td>
         </tr>
       ))}
     </React.Fragment>
