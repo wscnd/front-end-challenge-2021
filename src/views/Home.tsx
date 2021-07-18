@@ -5,7 +5,7 @@ import { PeopleList } from '../components/PeopleList';
 import { Select } from '../components/Select';
 import { ShowLoading } from '../components/ShowLoading';
 import { ShowRefreshing } from '../components/ShowRefreshing';
-import { WithPeopleList } from '../components/WithPeopleList';
+import { WithPeopleListQuery } from '../components/WithPeopleListQuery';
 
 const Home = () => {
   const [search, setSearch] = React.useState('');
@@ -21,7 +21,7 @@ const Home = () => {
   // React.useEffect(() => {
   //   console.log(selected);
   // }, [selected]);
-  //
+
   return (
     <React.Fragment>
       <section className="mb-6">
@@ -55,7 +55,7 @@ const Home = () => {
           <Select selectOptions={[selected, setSelected]} options={options} />
         </div>
       </section>
-      <WithPeopleList>
+      <WithPeopleListQuery>
         {(query) => {
           return (
             <div className="mb-6">
@@ -73,7 +73,6 @@ const Home = () => {
                 {query.data?.pages ? (
                   <PeopleList
                     search={search}
-                    query={query}
                     pages={query.data.pages}
                     filter={{ gender: selected.value }}
                   />
@@ -109,9 +108,8 @@ const Home = () => {
               </div>
             </div>
           );
-          // ) : null;
         }}
-      </WithPeopleList>
+      </WithPeopleListQuery>
     </React.Fragment>
   );
 };
