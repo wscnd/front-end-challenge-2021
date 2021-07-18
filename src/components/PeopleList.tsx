@@ -14,6 +14,11 @@ type PeopleListProps = React.FunctionComponent<{
 
 const PeopleList: PeopleListProps = ({ pages, search, filter }) => {
   const sortOrder = useSortContext()[0];
+
+  React.useEffect(() => {
+    console.log('sort Order', sortOrder);
+  }, [sortOrder]);
+
   return (
     <Table>
       <TableBody

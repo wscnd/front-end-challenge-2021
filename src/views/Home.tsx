@@ -20,7 +20,7 @@ const Home = () => {
   const [selected, setSelected] = React.useState(options[2]);
 
   React.useEffect(() => {
-    console.log(selected);
+    console.log('gender: ', selected);
   }, [selected]);
 
   return (
