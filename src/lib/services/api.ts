@@ -3,7 +3,6 @@ import axios from 'axios';
 export const api = axios.create({
   baseURL: 'https://randomuser.me/api/',
   params: {
-    seed: "fixed", // same query results
-    nat: "br"
-  }
+    seed: 'fixed', // same query results
+  },
 });
