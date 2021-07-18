@@ -13,9 +13,19 @@ module.exports = {
       colors: {
         primary: '#293845',
         secondary: '#9FAEBB',
-        // secondary: '#C3CFD9',
         bg: '#F7F9FA',
         'bg-2': '#DFE6ED',
+        'table-bg': '#C3CFD9',
+      },
+      tableLayout: ['hover', 'focus'],
+      keyframes: {
+        'spin-horario': {
+          "0%": { transform: 'rotate(360deg)' },
+          "100%": { transform: 'rotate(0deg)' },
+        },
+      },
+      animation: {
+        'spin-h': 'spin-horario 4s linear infinite',
       },
     },
   },
