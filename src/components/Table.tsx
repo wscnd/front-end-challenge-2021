@@ -14,7 +14,7 @@ const Table: React.FunctionComponent = ({ children }) => {
           </th>
         </tr>
       </thead>
-      {children}
+      <tbody>{children}</tbody>
     </table>
   );
 };
@@ -23,7 +23,7 @@ const TableBody: React.FunctionComponent<{
   personList: Person[];
 }> = ({ personList }) => {
   return (
-    <tbody>
+    <React.Fragment>
       {personList.map((person) => (
         <tr key={person.login.uuid.slice(0, 6)} className="h-10 bg-white">
           <td className="border-2 border-secondary ">
@@ -37,7 +37,7 @@ const TableBody: React.FunctionComponent<{
           <td className="border-2  border-secondary">Edit</td>
         </tr>
       ))}
-    </tbody>
+    </React.Fragment>
   );
 };
 
