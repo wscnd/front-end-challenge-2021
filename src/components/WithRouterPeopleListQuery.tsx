@@ -35,7 +35,7 @@ const WithRouterPeopleListQuery: React.FunctionComponent<WithRouterPeopleListQue
       },
       {
         params: {
-          results: 10,
+          results: 50,
           page: pageFromUrlParam,
         },
       },

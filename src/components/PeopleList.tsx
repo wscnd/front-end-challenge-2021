@@ -2,13 +2,13 @@ import * as React from 'react';
 import { useSortContext } from '../context/SortContext';
 import { Person } from '../lib/types/Person';
 import type { PersonPage } from '../lib/types/PersonQuery';
-import { filterByGender, filterByName } from '../lib/utils/mutatePerson';
+import { filterByGender, filterByName, filterByNationality } from '../lib/utils/mutatePerson';
 import { mutatePersonList as orderPersonList } from '../lib/utils/mutatePersonList';
 import { Table, TableBody } from './Table';
 
 type PeopleListProps = React.FunctionComponent<{
   search: string;
-  filter: { gender: string };
+  filter: { gender: string; nationality: string };
   pages: PersonPage;
 }>;
 
@@ -18,6 +18,10 @@ const PeopleList: PeopleListProps = ({ pages, search, filter }) => {
   React.useEffect(() => {
     console.log('sort Order', sortOrder);
   }, [sortOrder]);
+
+  React.useEffect(() => {
+    console.log('filters:', filter);
+  }, [filter]);
 
   return (
     <Table>
@@ -32,6 +36,7 @@ const PeopleList: PeopleListProps = ({ pages, search, filter }) => {
           'name',
         )
           .filter((person) => filterByName(person, search))
+          .filter((person) => filterByNationality(person, filter.nationality))
           .filter((person) => filterByGender(person, filter.gender))}
       />
     </Table>
