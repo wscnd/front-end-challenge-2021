@@ -1,6 +1,10 @@
 import * as React from 'react';
 
-import { SortAscendingIcon, SortDescendingIcon } from '@heroicons/react/solid';
+import {
+  AdjustmentsIcon,
+  SortAscendingIcon,
+  SortDescendingIcon,
+} from '@heroicons/react/solid';
 import { useSortContext } from '../context/SortContext';
 import { SortType } from '../lib/types/SortingTypes';
 
@@ -11,7 +15,7 @@ const SortButton = () => {
     (previousOrderType: SortType['order']) => {
       const mutate = {
         ascending: 'descending',
-        descending: 'ascending',
+        descending: 'unordered',
         unordered: 'ascending',
       };
       return mutate[previousOrderType] as SortType['order'];
@@ -33,6 +37,8 @@ const SortButton = () => {
     >
       {sorting.order === 'ascending' ? (
         <SortDescendingIcon className=" h-5 w-5 " />
+      ) : sorting.order === 'descending' ? (
+        <AdjustmentsIcon className=" h-5 w-5" />
       ) : (
         <SortAscendingIcon className=" h-5 w-5" />
       )}
