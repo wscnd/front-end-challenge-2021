@@ -39,7 +39,7 @@ const SortButton = () => {
       onClick={handleClick}
     >
       <React.Fragment>
-        <p className="fixed tooltip rounded shadow-lg text-xs bg-gray-100 text-primary ">
+        <p className="ml-5 -mt-5 tooltip rounded shadow-lg text-xs bg-gray-100 text-primary ">
           sort {setNextOrder[sorting.order]}
         </p>
         {sorting.order === 'ascending' ? (

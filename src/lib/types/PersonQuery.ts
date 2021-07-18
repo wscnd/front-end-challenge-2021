@@ -7,3 +7,5 @@ export type PersonListQueryOptions = UseInfiniteQueryOptions<QueryResult>;
 export type UsePersonList = ReturnType<typeof usePeopleListWithConfig>;
 
 export type PersonPage = InfiniteData<QueryResult>["pages"]
+
+export type PersonInfiniteData = InfiniteData<QueryResult>
