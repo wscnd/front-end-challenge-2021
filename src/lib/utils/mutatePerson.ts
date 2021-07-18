@@ -2,7 +2,7 @@ import { Person } from '../types/Person';
 
 const mutatePerson = (
   person: Person,
-  mutateType: 'filterByName' | 'filterByGender',
+  mutateType: 'filterByName' | 'filterByGender' | 'filterByNationality',
   mutateKey: string,
 ) => {
   const machine = {
@@ -12,6 +12,10 @@ const mutatePerson = (
     },
     filterByGender: () => {
       return person.gender.toLowerCase() === mutateKey.toLowerCase();
+    },
+
+    filterByNationality: () => {
+      return person.nat.toLowerCase() === mutateKey.toLowerCase();
     },
     noMutate: () => person,
   };
@@ -26,4 +30,8 @@ const filterByGender = (person: Person, gender: string) => {
   return mutatePerson(person, 'filterByGender', gender);
 };
 
-export { mutatePerson, filterByGender, filterByName };
+const filterByNationality = (person: Person, nationality: string) => {
+  return mutatePerson(person, 'filterByNationality', nationality);
+};
+
+export { mutatePerson, filterByGender, filterByName, filterByNationality };
