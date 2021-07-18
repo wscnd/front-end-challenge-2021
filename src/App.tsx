@@ -24,7 +24,7 @@ const App = () => {
           </Main>
         </Container>
       </Router>
-      <ReactQueryDevtools position="bottom-right" />
+      <ReactQueryDevtools position="bottom-left" />
     </QueryClientProvider>
   );
 };

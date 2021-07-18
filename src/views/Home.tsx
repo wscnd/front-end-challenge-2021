@@ -1,26 +1,26 @@
-import * as React from 'react';
-import { WithPeopleList } from '../components/WithPeopleList';
-import { PeopleList } from '../components/PeopleList';
 import { SearchIcon } from '@heroicons/react/solid';
-
+import * as React from 'react';
 import { DebounceInput } from 'react-debounce-input';
+import { PeopleList } from '../components/PeopleList';
+import { WithPeopleList } from '../components/WithPeopleList';
+
 
 const Home = () => {
   const [search, setSearch] = React.useState('');
 
   return (
     <React.Fragment>
-      <div className="mb-8">
-        <p className=" text-left prose-xl font-semibold ">
+      <section className="mb-6">
+        <p className=" text-left prose-xl font-semibold text-primary ">
           Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quos, fuga?
           Ducimus porro velit temporibus qui ea nostrum voluptatibus expedita
           eligendi deserunt pariatur! Voluptates amet distinctio voluptatum
           neque culpa aut nam?
         </p>
-      </div>
-      <div>
-        <div className="relative text-gray-400 focus-within:text-gray-600 mb-8">
-          <div className="pointer-events-none absolute inset-y-0 right-0 pr-3 flex items-center">
+      </section>
+      <section className="pb-12">
+        <div className="relative text-gray-400 focus-within:text-gray-600">
+          <div className="pointer-events-none absolute inset-y-0 right-4 pr-3 flex items-center">
             <SearchIcon className="h-5 w-5" aria-hidden="true" />
           </div>
           <DebounceInput
@@ -34,7 +34,7 @@ const Home = () => {
             onChange={(event) => setSearch(event.target.value)}
           />
         </div>
-      </div>
+      </section>
       <WithPeopleList>
         {(query) => <PeopleList search={search} query={query} />}
       </WithPeopleList>

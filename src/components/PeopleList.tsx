@@ -1,6 +1,11 @@
+import { RefreshIcon } from '@heroicons/react/solid';
 import * as React from 'react';
-import { Person } from '../lib/types/Person';
-import { UsePersonList } from '../lib/types/PersonQuery';
+import { ShowRefreshing } from '../components/ShowRefreshing';
+import type { Person } from '../lib/types/Person';
+import type { UsePersonList } from '../lib/types/PersonQuery';
+import { ShowLoading } from './ShowLoading';
+import { Table, TableBody } from './Table';
+
 
 type PeopleListProps = React.FunctionComponent<{
   query: UsePersonList;
@@ -21,65 +26,39 @@ const PeopleList: PeopleListProps = ({ query, search }) => {
 
   return (
     <div>
-      {query.isFetching ? <span>updating...</span> : null}
+      <div className="pointer-events-none fixed bottom-6 right-6 flex items-center">
+        <ShowRefreshing
+          Icon={RefreshIcon}
+          show={
+            query.isFetching && !query.isFetchingNextPage && !query.isLoading
+          }
+        />
+      </div>
       <section>
-        {query.isLoading ? (
-          <span>loading...</span>
-        ) : (
-          <div>
-            <Table>
-              {!!query.data?.pages.length &&
-                query.data?.pages.map((pages, index) => (
-                  <TableBody
-                    personList={pages.results.filter(filterPeople)}
-                    key={index}
-                  />
-                ))}
-            </Table>
-          </div>
-        )}
+        <Table>
+          {query.data?.pages.length
+            ? query.data?.pages.map((pages, index) => (
+                <TableBody
+                  personList={pages.results.filter(filterPeople)}
+                  key={index}
+                />
+              ))
+            : null}
+        </Table>
+        <ShowLoading
+          Icon={RefreshIcon}
+          show={query.isLoading}
+          text={'Loading...'}
+        />
       </section>
       <button onClick={() => query.fetchNextPage()}>fetch more</button>
+      <ShowLoading
+        Icon={RefreshIcon}
+        show={query.isFetchingNextPage}
+        text={'Loading More...'}
+      />
     </div>
   );
 };
 
 export { PeopleList };
-
-const Table: React.FunctionComponent = ({ children }) => {
-  return (
-    <table className="w-full text-center">
-      <thead className="text-lg">
-        <tr>
-          <td>ID</td>
-          <td>Name</td>
-          <td>Gender</td>
-          <td>Birth</td>
-          <td colSpan={2}>Actions</td>
-        </tr>
-      </thead>
-      {children}
-    </table>
-  );
-};
-
-const TableBody: React.FunctionComponent<{
-  personList: Person[];
-}> = ({ personList }) => {
-  return (
-    <tbody className="">
-      {personList.map((person) => (
-        <tr key={person.login.uuid.slice(0, 6)}>
-          <td>{person.login.uuid.slice(0, 6)}</td>
-          <td>
-            {person.name.first} {person.name.last}
-          </td>
-          <td>{person.gender}</td>
-          <td>{new Date(person.dob.date).toLocaleDateString()}</td>
-          <td>View</td>
-          <td>Edit</td>
-        </tr>
-      ))}
-    </tbody>
-  );
-};
