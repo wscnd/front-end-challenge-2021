@@ -13,7 +13,7 @@ type SelectProps = { selectOptions: UseSelected; options: Options[] };
 
 const Select: React.FunctionComponent<SelectProps> = ({
   selectOptions: [selected, setSelected],
-  options
+  options,
 }) => {
   return (
     <Listbox value={selected} onChange={setSelected}>
@@ -23,7 +23,7 @@ const Select: React.FunctionComponent<SelectProps> = ({
             Choose Gender
           </Listbox.Label>
           <div className="relative mt-1">
-            <Listbox.Button className="relative w-full py-2 pl-3 pr-10 text-left bg-white border-2 border-transparent rounded-md shadow-sm cursor-default ring-2 ring-offset-2 ring-offset-secondary ring-transparent focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-primary focus:ring-white focus:border-white sm:text-sm">
+            <Listbox.Button className="cursor-pointer relative w-full py-2 pl-3 pr-10 text-left bg-white border-2 border-transparent rounded-md shadow-sm  ring-2 ring-offset-2 ring-offset-secondary ring-transparent focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-primary focus:ring-white focus:border-white sm:text-sm">
               <span className="block text-gray-500 truncate">
                 {selected.name}
               </span>
@@ -52,7 +52,7 @@ const Select: React.FunctionComponent<SelectProps> = ({
                     className={({ active }) =>
                       classNames(
                         active ? 'text-white bg-table-bg' : 'text-gray-900',
-                        'cursor-default select-none relative py-2 pl-3 pr-9',
+                        'cursor-pointer select-none relative py-2 pl-3 pr-9',
                       )
                     }
                     value={option}

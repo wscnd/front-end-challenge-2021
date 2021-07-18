@@ -6,6 +6,7 @@ import { Select } from '../components/Select';
 import { ShowLoading } from '../components/ShowLoading';
 import { ShowRefreshing } from '../components/ShowRefreshing';
 import { WithPeopleListQuery } from '../components/WithPeopleListQuery';
+import { SortContextProvider } from '../context/SortContext';
 
 const Home = () => {
   const [search, setSearch] = React.useState('');
@@ -18,9 +19,9 @@ const Home = () => {
 
   const [selected, setSelected] = React.useState(options[2]);
 
-  // React.useEffect(() => {
-  //   console.log(selected);
-  // }, [selected]);
+  React.useEffect(() => {
+    console.log(selected);
+  }, [selected]);
 
   return (
     <React.Fragment>
@@ -71,11 +72,13 @@ const Home = () => {
               </div>
               <section>
                 {query.data?.pages ? (
-                  <PeopleList
-                    search={search}
-                    pages={query.data.pages}
-                    filter={{ gender: selected.value }}
-                  />
+                  <SortContextProvider>
+                    <PeopleList
+                      search={search}
+                      pages={query.data.pages}
+                      filter={{ gender: selected.value }}
+                    />
+                  </SortContextProvider>
                 ) : null}
                 <ShowLoading
                   Icon={RefreshIcon}
