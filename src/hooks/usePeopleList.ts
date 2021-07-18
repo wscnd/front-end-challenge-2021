@@ -26,7 +26,7 @@ export const fetchPeopleWithOptions = ({
     },
   };
 
-  console.log('newFetchOptions:', newFetchOptions);
+  // console.log('newFetchOptions:', newFetchOptions);
   return api
     .get<QueryResult>('', newFetchOptions)
     .then((response) => response.data);

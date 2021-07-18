@@ -1,16 +1,23 @@
 import * as React from 'react';
 import type { Person } from '../lib/types/Person';
 
+import { SortButton } from './SortButton';
+
 const Table: React.FunctionComponent = ({ children }) => {
   return (
     <table className="w-full mb-8 text-center border-collapse table-fixed">
       <thead className="text-lg border-collapse bg-table-bg text-primary">
         <tr>
-          <th className="w-1/3 border-2 border-secondary">Name</th>
+          <th className="w-1/3 border-2 border-secondary">
+            <div className="relative flex justify-center items-center">
+              <span>Name</span>
+              <SortButton />
+            </div>
+          </th>
           <th className="w-1/6 border-2 border-secondary">Gender</th>
           <th className="w-1/6 border-2 border-secondary">Birth</th>
           <th className="w-1/3 border-2 border-secondary" colSpan={2}>
-          Actions
+            Actions
           </th>
         </tr>
       </thead>
