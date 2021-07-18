@@ -1,8 +1,10 @@
-import { SearchIcon } from '@heroicons/react/solid';
+import { PlusIcon, RefreshIcon, SearchIcon } from '@heroicons/react/solid';
 import * as React from 'react';
 import { DebounceInput } from 'react-debounce-input';
 import { PeopleList } from '../components/PeopleList';
 import { Select } from '../components/Select';
+import { ShowLoading } from '../components/ShowLoading';
+import { ShowRefreshing } from '../components/ShowRefreshing';
 import { WithPeopleList } from '../components/WithPeopleList';
 
 const Home = () => {
@@ -19,7 +21,7 @@ const Home = () => {
   // React.useEffect(() => {
   //   console.log(selected);
   // }, [selected]);
-
+  //
   return (
     <React.Fragment>
       <section className="mb-6">
@@ -54,13 +56,61 @@ const Home = () => {
         </div>
       </section>
       <WithPeopleList>
-        {(query) => (
-          <PeopleList
-            search={search}
-            query={query}
-            filter={{ gender: selected.value }}
-          />
-        )}
+        {(query) => {
+          return (
+            <div className="mb-6">
+              <div className="fixed flex items-center pointer-events-none bottom-6 right-6">
+                <ShowRefreshing
+                  Icon={RefreshIcon}
+                  show={
+                    query.isFetching &&
+                    !query.isFetchingNextPage &&
+                    !query.isLoading
+                  }
+                />
+              </div>
+              <section>
+                {query.data?.pages ? (
+                  <PeopleList
+                    search={search}
+                    query={query}
+                    pages={query.data.pages}
+                    filter={{ gender: selected.value }}
+                  />
+                ) : null}
+                <ShowLoading
+                  Icon={RefreshIcon}
+                  show={query.isLoading}
+                  text={'Loading...'}
+                />
+              </section>
+
+              <div className="flex justify-center w-full h-10">
+                {!query.isFetchingNextPage && !query.isLoading ? (
+                  <button
+                    type="button"
+                    onClick={() => query.fetchNextPage()}
+                    disabled={query.isFetching}
+                    className="inline-flex items-center px-3 py-2 text-sm font-medium leading-4 border border-transparent rounded-md shadow-sm disabled:bg-bg-2 disabled:cursor-not-allowed disabled:text-gray-400 text-bg bg-primary hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-primary"
+                  >
+                    <PlusIcon
+                      className="-ml-0.5 mr-2 h-4 w-4"
+                      aria-hidden="true"
+                    />
+                    Fetch More
+                  </button>
+                ) : (
+                  <ShowLoading
+                    Icon={RefreshIcon}
+                    show={query.isFetchingNextPage}
+                    text={'Loading More...'}
+                  />
+                )}
+              </div>
+            </div>
+          );
+          // ) : null;
+        }}
       </WithPeopleList>
     </React.Fragment>
   );
