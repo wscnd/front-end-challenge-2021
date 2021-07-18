@@ -9,18 +9,23 @@ function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ');
 }
 
-type SelectProps = { selectOptions: UseSelected; options: Options[] };
+type SelectProps = {
+  selectOptions: UseSelected;
+  options: Options[];
+  labelText: string;
+};
 
 const Select: React.FunctionComponent<SelectProps> = ({
   selectOptions: [selected, setSelected],
   options,
+  labelText,
 }) => {
   return (
     <Listbox value={selected} onChange={setSelected}>
       {({ open }) => (
         <>
           <Listbox.Label className="block text-sm font-medium text-gray-700">
-            Choose Gender
+            {labelText}
           </Listbox.Label>
           <div className="relative mt-1">
             <Listbox.Button className="cursor-pointer relative w-full py-2 pl-3 pr-10 text-left bg-white border-2 border-transparent rounded-md shadow-sm  ring-2 ring-offset-2 ring-offset-secondary ring-transparent focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-primary focus:ring-white focus:border-white sm:text-sm">

@@ -62,7 +62,11 @@ const Home = () => {
         </div>
 
         <div className="grid-start-4">
-          <Select selectOptions={[selected, setSelected]} options={options} />
+          <Select
+            selectOptions={[selectedGender, setSelectedGender]}
+            options={genderOptions}
+            labelText={'Select Gender'}
+          />
         </div>
       </section>
       <WithRouterPeopleListQuery>

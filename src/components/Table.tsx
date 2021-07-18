@@ -14,6 +14,7 @@ const Table: React.FunctionComponent = ({ children }) => {
               <SortButton />
             </div>
           </th>
+          <th className="w-1/6 border-2 border-secondary">Nat</th>
           <th className="w-1/6 border-2 border-secondary">Gender</th>
           <th className="w-1/6 border-2 border-secondary">Birth</th>
           <th className="w-1/3 border-2 border-secondary" colSpan={2}>
@@ -39,6 +40,7 @@ const TableBody: React.FunctionComponent<{
           <td className="border-2 border-secondary ">
             {person.name.first} {person.name.last}
           </td>
+          <td className="border-2 border-secondary">{person.nat}</td>
           <td className="border-2 border-secondary">{person.gender}</td>
           <td className="border-2 border-secondary">
             {new Date(person.dob.date).toLocaleDateString()}
