@@ -6,7 +6,7 @@ type WithPeopleProp = {
   children: React.FunctionComponent<UsePersonList>;
 };
 
-const WithPeopleList: React.FunctionComponent<WithPeopleProp> = ({
+const WithPeopleListQuery: React.FunctionComponent<WithPeopleProp> = ({
   children,
 }) => {
   const peopleQuery = usePeopleListWithConfig(
@@ -21,11 +21,11 @@ const WithPeopleList: React.FunctionComponent<WithPeopleProp> = ({
     {
       params: {
         results: 50,
-        page: 30
+        page: 30,
       },
     },
   );
   return children(peopleQuery);
 };
 
-export { WithPeopleList };
+export { WithPeopleListQuery };
