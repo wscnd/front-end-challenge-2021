@@ -19,8 +19,12 @@
   },
   "homepage": "https://github.com/wscnd/front-end-challenge-2021#readme",
   "dependencies": {
+    "@headlessui/react": "^1.3.0",
+    "@heroicons/react": "^1.0.2",
+    "@tailwindcss/typography": "^0.4.1",
     "axios": "^0.21.1",
     "react": "^17.0.2",
+    "react-debounce-input": "^3.2.3",
     "react-dom": "^17.0.2",
     "react-query": "^3.19.0",
     "react-router-dom": "^5.2.0"
@@ -34,6 +38,7 @@
     "autoprefixer": "^10.3.1",
     "eslint": "^7.30.0",
     "eslint-plugin-react": "^7.24.0",
+    "eslint-plugin-react-hooks": "^4.2.0",
     "postcss": "^8.3.5",
     "prettier": "^2.3.2",
     "tailwindcss": "^2.2.4",
