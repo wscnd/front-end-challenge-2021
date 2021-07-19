@@ -119,7 +119,7 @@ const Home = () => {
         </div>
       </section>
       <WithRouterPeopleListQuery>
-        {({ query, fetchMorePeople }) => {
+        {({ query, actions }) => {
           return (
             <div className="mb-6">
               <div className="fixed flex items-center pointer-events-none bottom-6 right-6">
