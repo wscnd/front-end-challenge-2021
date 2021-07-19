@@ -3,8 +3,8 @@ import * as React from 'react';
 import { DebounceInput } from 'react-debounce-input';
 import { useInfiniteQuery } from 'react-query';
 import { useHistory } from 'react-router-dom';
+import { Button } from '../components/Button';
 import { PeopleList } from '../components/PeopleList';
-import { QueryMoreButton } from '../components/QueryMoreButton';
 import { Select } from '../components/Select';
 import { ShowLoading } from '../components/ShowLoading';
 import { ShowRefreshing } from '../components/ShowRefreshing';
@@ -154,9 +154,10 @@ const Home = () => {
 
               <div className="flex justify-center w-full h-10">
                 {!query.isFetchingNextPage && !query.isLoading ? (
-                  <QueryMoreButton
-                    query={query}
-                    fetchMorePeople={fetchMorePeople}
+                  <Button
+                    disabled={query.isFetching}
+                    onClick={actions.fetchMorePeople}
+                    text={'Fetch More?'}
                   />
                 ) : (
                   <ShowLoading
