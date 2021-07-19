@@ -33,10 +33,7 @@ const TableBody: React.FunctionComponent<{
   return (
     <React.Fragment>
       {personList.map((person) => (
-        <tr
-          key={person.login.uuid.slice(0, 6)}
-          className="h-10 bg-white hover:bg-gray-200 hover:cursor-pointer"
-        >
+        <tr key={person.login.uuid.slice(0, 6)} className="h-10 bg-white ">
           <td className="border-2 border-secondary ">
             {person.name.first} {person.name.last}
           </td>
@@ -45,7 +42,9 @@ const TableBody: React.FunctionComponent<{
           <td className="border-2 border-secondary">
             {new Date(person.dob.date).toLocaleDateString()}
           </td>
-          <td className="border-2 border-secondary">View</td>
+          <td className="border-2 border-secondary hover:bg-gray-200 hover:cursor-pointer">
+            View
+          </td>
           <td className="border-2 border-secondary">Edit</td>
         </tr>
       ))}

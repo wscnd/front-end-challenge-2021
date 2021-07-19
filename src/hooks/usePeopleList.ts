@@ -2,7 +2,7 @@ import { QueryFunctionContext, useInfiniteQuery, useQuery } from 'react-query';
 import { api } from '../lib/services/api';
 import type { Person } from '../lib/types/Person';
 import type { QueryResult } from '../lib/types/QueryResult';
-import { PersonListQueryOptions } from '../lib/types/PersonQuery';
+import type { PersonListQueryOptions } from '../lib/types/PersonQuery';
 import { AxiosRequestConfig } from 'axios';
 
 export const fetchPeople = () => {

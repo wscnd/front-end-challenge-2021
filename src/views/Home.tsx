@@ -11,8 +11,8 @@ import { ShowRefreshing } from '../components/ShowRefreshing';
 import { WithRouterPeopleListQuery } from '../components/WithRouterPeopleListQuery';
 import { SortContextProvider } from '../context/SortContext';
 import { useSearchParams } from '../hooks/useSearchParams';
-import { Person } from '../lib/types/Person';
-import { QueryResult } from '../lib/types/QueryResult';
+import type { Person } from '../lib/types/Person';
+import type { QueryResult } from '../lib/types/QueryResult';
 
 const Home = () => {
   const { page } = useSearchParams('page');

@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { useSortContext } from '../context/SortContext';
-import { Person } from '../lib/types/Person';
+import type { Person } from '../lib/types/Person';
 import type { PersonPage } from '../lib/types/PersonQuery';
 import { filterByGender, filterByName, filterByNationality } from '../lib/utils/mutatePerson';
 import { mutatePersonList as orderPersonList } from '../lib/utils/mutatePersonList';

@@ -6,7 +6,7 @@ import {
   SortDescendingIcon,
 } from '@heroicons/react/solid';
 import { useSortContext } from '../context/SortContext';
-import { SortType } from '../lib/types/SortingTypes';
+import type { SortType } from '../lib/types/SortingTypes';
 
 const SortButton = () => {
   const [sorting, setSorting] = useSortContext();
