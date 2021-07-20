@@ -3,16 +3,16 @@ import * as React from 'react';
 import { DebounceInput } from 'react-debounce-input';
 import { useInfiniteQuery } from 'react-query';
 import { useHistory } from 'react-router-dom';
+import { Button } from '../components/Button';
 import { PeopleList } from '../components/PeopleList';
-import { QueryMoreButton } from '../components/QueryMoreButton';
 import { Select } from '../components/Select';
 import { ShowLoading } from '../components/ShowLoading';
 import { ShowRefreshing } from '../components/ShowRefreshing';
 import { WithRouterPeopleListQuery } from '../components/WithRouterPeopleListQuery';
 import { SortContextProvider } from '../context/SortContext';
 import { useSearchParams } from '../hooks/useSearchParams';
-import { Person } from '../lib/types/Person';
-import { QueryResult } from '../lib/types/QueryResult';
+import type { Person } from '../lib/types/Person';
+import type { QueryResult } from '../lib/types/QueryResult';
 
 const Home = () => {
   const { page } = useSearchParams('page');
@@ -119,7 +119,7 @@ const Home = () => {
         </div>
       </section>
       <WithRouterPeopleListQuery>
-        {({ query, fetchMorePeople }) => {
+        {({ query, actions }) => {
           return (
             <div className="mb-6">
               <div className="fixed flex items-center pointer-events-none bottom-6 right-6">
@@ -154,9 +154,10 @@ const Home = () => {
 
               <div className="flex justify-center w-full h-10">
                 {!query.isFetchingNextPage && !query.isLoading ? (
-                  <QueryMoreButton
-                    query={query}
-                    fetchMorePeople={fetchMorePeople}
+                  <Button
+                    disabled={query.isFetching}
+                    onClick={actions.fetchMorePeople}
+                    text={'Fetch More?'}
                   />
                 ) : (
                   <ShowLoading

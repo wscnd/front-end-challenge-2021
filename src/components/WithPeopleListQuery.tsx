@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { usePeopleListWithConfig } from '../hooks/usePeopleList';
-import { UsePersonList } from '../lib/types/PersonQuery';
+import type { UsePersonList } from '../lib/types/PersonQuery';
 
 type WithPeopleProp = {
   children: React.FunctionComponent<UsePersonList>;

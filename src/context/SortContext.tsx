@@ -1,6 +1,6 @@
 //create react context
 import * as React from 'react';
-import { SetState } from '../lib/types/SetState';
+import type { SetState } from '../lib/types/SetState';
 import type { SortType } from '../lib/types/SortingTypes';
 import { createContext } from './createContext';
 

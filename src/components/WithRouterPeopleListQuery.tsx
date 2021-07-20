@@ -60,7 +60,7 @@ const WithRouterPeopleListQuery: React.FunctionComponent<WithRouterPeopleListQue
       console.log('pageFromUrlParam:', pageFromUrlParam);
     }, [pageFromUrlParam]);
 
-    return children({ query: peopleQuery, fetchMorePeople });
+    return children({ query: peopleQuery, actions: { fetchMorePeople } });
   };
 
 export { WithRouterPeopleListQuery };

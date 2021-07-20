@@ -6,7 +6,7 @@ import {
   SortDescendingIcon,
 } from '@heroicons/react/solid';
 import { useSortContext } from '../context/SortContext';
-import { SortType } from '../lib/types/SortingTypes';
+import type { SortType } from '../lib/types/SortingTypes';
 
 const SortButton = () => {
   const [sorting, setSorting] = useSortContext();
@@ -35,7 +35,7 @@ const SortButton = () => {
   return (
     <button
       type="button"
-      className="absolute right-3 hover:text-gray-500 has-tooltip"
+      className="absolute right-3 hover:text-gray-500 has-tooltip focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-primary focus:ring-white focus:border-white"
       onClick={handleClick}
     >
       <React.Fragment>
