@@ -1,5 +1,7 @@
+import { UserCircleIcon } from '@heroicons/react/solid';
 import * as React from 'react';
 import type { Person } from '../lib/types/Person';
+import { Button } from './Button';
 
 import { SortButton } from './SortButton';
 
@@ -9,17 +11,18 @@ const Table: React.FunctionComponent = ({ children }) => {
       <thead className="text-lg border-collapse bg-table-bg text-primary">
         <tr>
           <th className="w-1/3 border-2 border-secondary">
-            <div className="relative flex justify-center items-center">
+            <div className="relative flex items-center justify-center">
               <span>Name</span>
               <SortButton />
             </div>
           </th>
           <th className="w-1/6 border-2 border-secondary">Nat</th>
           <th className="w-1/6 border-2 border-secondary">Gender</th>
-          <th className="w-1/6 border-2 border-secondary">Birth</th>
-          <th className="w-1/3 border-2 border-secondary" colSpan={2}>
+          <th className="w-1/4 border-2 border-secondary">Birth</th>
+          <th className="w-1/6 border-2 border-secondary">Actions</th>
+          {/* <th className="w-1/3 border-2 border-secondary" colSpan={2}>
             Actions
-          </th>
+          </th> */}
         </tr>
       </thead>
       <tbody>{children}</tbody>
@@ -29,7 +32,10 @@ const Table: React.FunctionComponent = ({ children }) => {
 
 const TableBody: React.FunctionComponent<{
   personList: Person[];
-}> = ({ personList }) => {
+  actions: {
+    view: (person: Person) => void;
+  };
+}> = ({ personList, actions }) => {
   return (
     <React.Fragment>
       {personList.map((person) => (
@@ -42,10 +48,15 @@ const TableBody: React.FunctionComponent<{
           <td className="border-2 border-secondary">
             {new Date(person.dob.date).toLocaleDateString()}
           </td>
-          <td className="border-2 border-secondary hover:bg-gray-200 hover:cursor-pointer">
-            View
+          <td className=" border-2 border-secondary ">
+            <Button
+              disabled={false}
+              text="View"
+              onClick={() => actions.view(person)}
+              Icon={UserCircleIcon}
+            />
           </td>
-          <td className="border-2 border-secondary">Edit</td>
+          {/* <td className="border-2 border-secondary">Edit</td> */}
         </tr>
       ))}
     </React.Fragment>
