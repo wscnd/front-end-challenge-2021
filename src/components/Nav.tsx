@@ -17,17 +17,19 @@ const Nav = () => {
               <div className="flex items-center justify-center flex-1 sm:items-stretch sm:justify-start">
                 <div className="flex items-center flex-shrink-0">
                   <img
-                    className="block w-auto h-8 lg:hidden"
+                    className="block w-10 h-10 lg:hidden bg-bg-2"
                     src="/img/logo.png"
                     alt="Logo"
                   />
                   <img
-                    className="hidden w-auto h-8 lg:block"
+                    className="hidden w-10 h-10 lg:block bg-bg-2"
                     src="/img/logo.png"
                     alt="Logo"
                   />
                 </div>
-                <span className="w-full pl-5 my-6 text-xl font-bold prose">Company</span>
+                <span className="w-full pl-5 my-6 text-xl font-bold prose">
+                  Company
+                </span>
               </div>
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                 {/* Profile dropdown */}
