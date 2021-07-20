@@ -92,63 +92,80 @@ const DisplayPerson: React.FunctionComponent<DisplayPersonProps> = ({
                 </Dialog.Description>
                 <div className="border-t border-gray-200">
                   <dl>
-                    <div className="px-2 py-1 sm:py-3 bg-gray-50 sm:grid sm:grid-cols-2 sm:gap-4 sm:px-6">
-                      <dt className="text-sm font-medium text-gray-500">
+                    <div className="px-2 py-1 sm:py-3 bg-table-bg sm:grid sm:grid-cols-2 sm:gap-4 sm:px-6">
+                      <dt className="text-sm  text-primary uppercase font-semibold">
                         Full name
                       </dt>
-                      <dd className="mt-1 text-sm text-gray-900 sm:mt-0 ">
+                      <dd className="mt-1 text-sm text-gray-600 sm:mt-0 ">
                         {`${person.name.first}  ${person.name.last}`}
                       </dd>
                     </div>
                     <div className="px-2 py-1 sm:py-3 bg-white sm:grid sm:grid-cols-2 sm:gap-4 sm:px-6">
-                      <dt className="text-sm font-medium text-gray-500">
-                        Birthdate
+                      <dt className="text-sm  text-primary uppercase font-semibold">
+                        Email address
                       </dt>
-                      <dd className="mt-1 text-sm text-gray-900 sm:mt-0 ">
-                        {`${new Date(person.dob.date).toLocaleDateString()}`}
+                      <dd className="mt-1 text-sm text-gray-600 sm:mt-0 ">
+                        {`${person.email}`}
                       </dd>
                     </div>
-                    <div className="px-2 py-1 sm:py-3 bg-gray-50 sm:grid sm:grid-cols-2 sm:gap-4 sm:px-6">
-                      <dt className="text-sm font-medium text-gray-500">
+                    <div className="px-2 py-1 sm:py-3 bg-table-bg sm:grid sm:grid-cols-2 sm:gap-4 sm:px-6">
+                      <dt className="text-sm  text-primary uppercase font-semibold">
                         Gender
                       </dt>
-                      <dd className="mt-1 text-sm text-gray-900 capitalize sm:mt-0">
+                      <dd className="mt-1 text-sm text-gray-600 capitalize sm:mt-0">
                         {person.gender}
                       </dd>
                     </div>
                     <div className="px-2 py-1 sm:py-3 bg-white sm:grid sm:grid-cols-2 sm:gap-4 sm:px-6">
-                      <dt className="text-sm font-medium text-gray-500">
-                        Email address
+                      <dt className="text-sm  text-primary uppercase font-semibold">
+                        Birthdate
                       </dt>
-                      <dd className="mt-1 text-sm text-gray-900 sm:mt-0 ">
-                        {`${person.email}`}
+                      <dd className="mt-1 text-sm text-gray-600 sm:mt-0 ">
+                        {`${new Date(person.dob.date).toLocaleDateString()}`}
                       </dd>
                     </div>
-                    <div className="px-2 py-1 sm:py-3 bg-gray-50 sm:grid sm:grid-cols-2 sm:gap-4 sm:px-6">
-                      <dt className="text-sm font-medium text-gray-500">
+
+                    <div className="px-2 py-1 sm:py-3 bg-table-bg sm:grid sm:grid-cols-2 sm:gap-4 sm:px-6">
+                      <dt className="text-sm  text-primary uppercase font-semibold">
+                        Phone
+                      </dt>
+                      <dd className="mt-1 text-sm text-gray-600 capitalize sm:mt-0">
+                        {person.phone}
+                      </dd>
+                    </div>
+                    <div className="px-2 py-1 sm:py-3 bg-white sm:grid sm:grid-cols-2 sm:gap-4 sm:px-6">
+                      <dt className="text-sm  text-primary uppercase font-semibold">
+                        Nationality
+                      </dt>
+                      <dd className="mt-1 text-sm text-gray-600 sm:mt-0 ">
+                        {`${person.nat}`}
+                      </dd>
+                    </div>
+                    <div className="px-2 py-1 sm:py-3 bg-table-bg sm:grid sm:grid-cols-2 sm:gap-4 sm:px-6">
+                      <dt className="text-sm  text-primary uppercase font-semibold">
                         Address Line
                       </dt>
-                      <dd className="mt-1 text-sm text-gray-900 sm:mt-0 justify">
+                      <dd className="mt-1 text-sm text-gray-600 sm:mt-0 justify">
                         <p>
                           {`${person.location.street.number} ${person.location.street.name} `}
                         </p>
                       </dd>
-                      <dt className="text-sm font-medium text-gray-500">
+                      <dt className="text-sm  text-primary uppercase font-semibold">
                         City
                       </dt>
-                      <dd className="mt-1 text-sm text-gray-900 sm:mt-0 justify">
+                      <dd className="mt-1 text-sm text-gray-600 sm:mt-0 justify">
                         {person.location.city}
                       </dd>
-                      <dt className="text-sm font-medium text-gray-500">
+                      <dt className="text-sm  text-primary uppercase font-semibold">
                         State
                       </dt>
-                      <dd className="mt-1 text-sm text-gray-900 sm:mt-0 justify">
+                      <dd className="mt-1 text-sm text-gray-600 sm:mt-0 justify">
                         {person.location.state}
                       </dd>
-                      <dt className="text-sm font-medium text-gray-500">
+                      <dt className="text-sm  text-primary uppercase font-semibold">
                         Country
                       </dt>
-                      <dd className="mt-1 text-sm text-gray-900 sm:mt-0 justify">
+                      <dd className="mt-1 text-sm text-gray-600 sm:mt-0 justify">
                         {person.location.country}
                       </dd>
                     </div>
