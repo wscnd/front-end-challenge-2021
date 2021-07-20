@@ -61,7 +61,7 @@ const DisplayPerson: React.FunctionComponent<DisplayPersonProps> = ({
             leaveFrom="opacity-100 translate-y-0 sm:scale-100"
             leaveTo="opacity-0 translate-y-40 sm:translate-y-0 sm:scale-95"
           >
-            <div className="inline-block px-4 pt-5 pb-4 text-left align-bottom transition-all transform bg-white shadow-xl sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:p-6">
+            <div className="inline-block px-4 pt-5 pb-4 text-left mt-14 align-bottom transition-all transform bg-white shadow-xl sm:my-8 sm:align-middle sm:max-w-lg sm:w-full sm:p-6">
               <div className="flex justify-end md:justify-end ">
                 <button
                   type="button"
@@ -74,25 +74,25 @@ const DisplayPerson: React.FunctionComponent<DisplayPersonProps> = ({
               </div>
               <div className="flex justify-center -mt-24 md:justify-center">
                 <img
-                  className="flex-shrink-0 object-cover w-32 h-32 rounded-full shadow-xl border-3 border-primary bg-bg-2 "
+                  className="flex-shrink-0 object-cover w-20 h-20 sm:w-32 sm:h-32 rounded-full shadow-xl border-3 border-primary bg-bg-2 "
                   src={person.picture.large}
                 />
               </div>
               <section className="mt-3 text-center sm:mt-5">
                 <Dialog.Title
                   as="h3"
-                  className="mb-6 text-lg font-medium leading-6 text-gray-900 uppercase"
+                  className="sm:mb-6 text-xs sm:text-lg font-medium leading-6 text-gray-900 uppercase"
                 >
                   {`${person.name.title}  ${person.name.last}, ${person.gender} , ${person.dob.age} y.o`}
                 </Dialog.Title>
-                <Dialog.Description className="mb-6">
+                <Dialog.Description className="mb-6 text-xs md:prose">
                   Lorem ipsum, dolor sit amet consectetur adipisicing elit. Eius
                   aliquam laudantium explicabo pariatur iste dolorem animi vitae
                   error totam. At sapiente aliquam accusamus facere veritatis.
                 </Dialog.Description>
                 <div className="border-t border-gray-200">
                   <dl>
-                    <div className="px-4 py-3 bg-gray-50 sm:grid sm:grid-cols-2 sm:gap-4 sm:px-6">
+                    <div className="px-2 py-1 sm:py-3 bg-gray-50 sm:grid sm:grid-cols-2 sm:gap-4 sm:px-6">
                       <dt className="text-sm font-medium text-gray-500">
                         Full name
                       </dt>
@@ -100,7 +100,7 @@ const DisplayPerson: React.FunctionComponent<DisplayPersonProps> = ({
                         {`${person.name.first}  ${person.name.last}`}
                       </dd>
                     </div>
-                    <div className="px-4 py-3 bg-white sm:grid sm:grid-cols-2 sm:gap-4 sm:px-6">
+                    <div className="px-2 py-1 sm:py-3 bg-white sm:grid sm:grid-cols-2 sm:gap-4 sm:px-6">
                       <dt className="text-sm font-medium text-gray-500">
                         Birthdate
                       </dt>
@@ -108,7 +108,7 @@ const DisplayPerson: React.FunctionComponent<DisplayPersonProps> = ({
                         {`${new Date(person.dob.date).toLocaleDateString()}`}
                       </dd>
                     </div>
-                    <div className="px-4 py-3 bg-gray-50 sm:grid sm:grid-cols-2 sm:gap-4 sm:px-6">
+                    <div className="px-2 py-1 sm:py-3 bg-gray-50 sm:grid sm:grid-cols-2 sm:gap-4 sm:px-6">
                       <dt className="text-sm font-medium text-gray-500">
                         Gender
                       </dt>
@@ -116,7 +116,7 @@ const DisplayPerson: React.FunctionComponent<DisplayPersonProps> = ({
                         {person.gender}
                       </dd>
                     </div>
-                    <div className="px-4 py-3 bg-white sm:grid sm:grid-cols-2 sm:gap-4 sm:px-6">
+                    <div className="px-2 py-1 sm:py-3 bg-white sm:grid sm:grid-cols-2 sm:gap-4 sm:px-6">
                       <dt className="text-sm font-medium text-gray-500">
                         Email address
                       </dt>
@@ -124,7 +124,7 @@ const DisplayPerson: React.FunctionComponent<DisplayPersonProps> = ({
                         {`${person.email}`}
                       </dd>
                     </div>
-                    <div className="px-4 py-3 bg-gray-50 sm:grid sm:grid-cols-2 sm:gap-4 sm:px-6">
+                    <div className="px-2 py-1 sm:py-3 bg-gray-50 sm:grid sm:grid-cols-2 sm:gap-4 sm:px-6">
                       <dt className="text-sm font-medium text-gray-500">
                         Address Line
                       </dt>

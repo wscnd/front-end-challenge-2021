@@ -24,11 +24,11 @@ const Select: React.FunctionComponent<SelectProps> = ({
     <Listbox value={selected} onChange={setSelected}>
       {({ open }) => (
         <>
-          <Listbox.Label className="block text-sm font-medium text-gray-700">
+          <Listbox.Label className="flex items-end justify-center my-1 md:my-0  prose-sm font-semibold text-gray-700">
             {labelText}
           </Listbox.Label>
           <div className="relative mt-1">
-            <Listbox.Button className="cursor-pointer relative w-full py-2 pl-3 pr-10 text-left bg-white border-2 border-transparent rounded-md shadow-sm  ring-2 ring-offset-2 ring-offset-secondary ring-transparent focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-primary focus:ring-white focus:border-white sm:text-sm">
+            <Listbox.Button className="relative w-full py-2 pl-3 pr-10 text-left bg-white border-2 border-transparent rounded-md shadow-sm cursor-pointer ring-2 ring-offset-2 ring-offset-secondary ring-transparent focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-primary focus:ring-white focus:border-white sm:prose-sm">
               <span className="block text-gray-500 truncate">
                 {selected.name}
               </span>
@@ -49,7 +49,7 @@ const Select: React.FunctionComponent<SelectProps> = ({
             >
               <Listbox.Options
                 static
-                className="absolute z-10 w-full py-1 mt-1 overflow-auto text-base bg-white rounded-md shadow-lg max-h-60 ring-2 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
+                className="absolute z-10 w-full py-1 mt-1 overflow-auto text-base bg-white rounded-md shadow-lg max-h-64 ring-2 ring-black ring-opacity-5 focus:outline-none sm:text-sm"
               >
                 {options.map((option) => (
                   <Listbox.Option
