@@ -1,13 +1,10 @@
 import * as React from 'react';
-import { useQueryClient } from 'react-query';
-import { useHistory } from 'react-router-dom';
-import { usePeopleListWithConfig } from '../hooks/usePeopleList';
+import { usePeopleListWithConfigPaged } from '../hooks/usePeopleList';
 import { useSearchParams } from '../hooks/useSearchParams';
-import type { PersonInfiniteData } from '../lib/types/PersonQuery';
-import type { WithRouterPeopleListQueryType } from '../lib/types/WithRouterPeopleListQuery';
+import type { WithRouterPeopleListQueryTypePaged } from '../lib/types/WithRouterPeopleListQuery';
 
 type WithRouterPeopleListQueryProps = {
-  children: React.FunctionComponent<WithRouterPeopleListQueryType>;
+  children: React.FunctionComponent<WithRouterPeopleListQueryTypePaged>;
 };
 
 const WithRouterPeopleListQuery: React.FunctionComponent<WithRouterPeopleListQueryProps> =
@@ -16,22 +13,19 @@ const WithRouterPeopleListQuery: React.FunctionComponent<WithRouterPeopleListQue
      * NOTE: PageQueryParams Related
      **/
 
-    const history = useHistory();
     const { page } = useSearchParams('page');
-    const pageFromUrlParam = React.useState(page)[0];
+    const [pageFromUrlParam, setPageFromUrlParam] = React.useState(() => {
+      return page || '0';
+    });
 
     /**
      * NOTE: PersonQuery Related
      **/
-    const queryClient = useQueryClient();
-    const peopleQuery = usePeopleListWithConfig(
+    const personQuery = usePeopleListWithConfigPaged(
       {
         keepPreviousData: true,
         //eslint-disable-next-line @typescript-eslint/no-unused-vars
-        getNextPageParam: (lastPage, pages) => {
-          // console.log('pages:', pages)
-          return lastPage.info.page + 1;
-        },
+        refetchOnWindowFocus: false,
       },
       {
         params: {
@@ -41,26 +35,28 @@ const WithRouterPeopleListQuery: React.FunctionComponent<WithRouterPeopleListQue
       },
     );
 
-    const fetchMorePeople = React.useCallback(async () => {
-      await peopleQuery.fetchNextPage();
+    const fetchPage = React.useCallback(async (page: number) => {
+      setPageFromUrlParam(() => {
+        return String(page);
+      });
+    }, []);
 
-      const [latestPageInfo] =
-        queryClient
-          .getQueryData<PersonInfiniteData>('people')
-          ?.pages.slice(-1) ?? [];
+    const fetchPreviousPage = React.useCallback(async () => {
+      setPageFromUrlParam((previous) => {
+        return String(Number(previous) - 1);
+      });
+    }, []);
 
-      console.log('latestPageInfo:', latestPageInfo.info.page);
+    const fetchNextPage = React.useCallback(async () => {
+      setPageFromUrlParam((previous) => {
+        return String(Number(previous) + 1);
+      });
+    }, []);
 
-      if (latestPageInfo) {
-        history.replace({ search: `page=${latestPageInfo.info.page}` });
-      }
-    }, [peopleQuery, history, queryClient]);
-
-    React.useEffect(() => {
-      console.log('pageFromUrlParam:', pageFromUrlParam);
-    }, [pageFromUrlParam]);
-
-    return children({ query: peopleQuery, actions: { fetchMorePeople } });
+    return children({
+      query: personQuery,
+      actions: { fetchNextPage, fetchPreviousPage, fetchPage },
+    });
   };
 
 export { WithRouterPeopleListQuery };
