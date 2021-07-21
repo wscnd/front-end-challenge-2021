@@ -51,15 +51,16 @@ const Pagination: React.FunctionComponent<PaginationProps> = ({
   );
 
   React.useEffect(() => {
-    setNotHasNextPage(() => Number(currentPage) >= maxPages
-    // || isFetching
+    setNotHasNextPage(
+      () => Number(currentPage) >= maxPages,
+      // || isFetching
     );
     setNotHasPreviousPage(
       () =>
         currentPage === null ||
         Number(currentPage) === 1 ||
-        Number(currentPage) < 1
-        // || isFetching,
+        Number(currentPage) < 1,
+      // || isFetching,
     );
   }, [currentPage, isFetching, maxPages]);
 
