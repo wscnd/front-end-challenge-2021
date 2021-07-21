@@ -1,7 +1,7 @@
 import { RefreshIcon, SearchIcon } from '@heroicons/react/solid';
 import * as React from 'react';
 import { DebounceInput } from 'react-debounce-input';
-import { useQuery } from 'react-query';
+import { useQuery, useQueryClient } from 'react-query';
 import { Pagination } from '../components/Pagination';
 import { PersonList } from '../components/PersonList';
 import { Select } from '../components/Select';
@@ -20,6 +20,7 @@ const Home = () => {
   const [search, setSearch] = React.useState('');
 
   const queryClient = useQuery<QueryResult>(['person', page]);
+  const client = useQueryClient();
 
   // NOTE: Gender options
   const genderOptions = React.useState(() => [
@@ -29,26 +30,37 @@ const Home = () => {
   ])[0];
 
   const [selectedGender, setSelectedGender] = React.useState(genderOptions[2]);
-
-  // NOTE: Nationality options, this is intense and probably overkill
+  // NOTE: Nationality options, this is intense and probably overkill but it updates on every fetch to get a new list of nationalities
   const nationalityOptions = React.useMemo(() => {
     const anyNationality = { name: 'Any', value: '', id: 0 };
-    return Object.values(
-      queryClient.data?.results
-        .reduce((store: Person[], current) => [...store, current], [])
-        .reduce(
-          (store, person) => ({
-            ...store,
-            [person.nat]: {
-              name: person.nat,
-              value: person.nat,
-              id: person.nat,
-            },
-          }),
-          { any: anyNationality },
-        ) || [anyNationality],
-    )?.map((value, index) => ({ ...value, id: index }));
-  }, [queryClient]);
+    let history;
+
+    if (queryClient.isFetched) {
+      history = Object.values(
+        client
+          .getQueryCache()
+          .findAll('person')
+          .map((query) => query?.state?.data as QueryResult)
+          .filter(Boolean)
+          .reduce(
+            (store: Person[], current) => [...store, ...current.results],
+            [],
+          )
+          .reduce(
+            (store, person) => ({
+              ...store,
+              [person.nat]: {
+                name: person.nat,
+                value: person.nat,
+                id: person.nat,
+              },
+            }),
+            { any: anyNationality },
+          ),
+      ).map((value, index) => ({ ...value, id: index }));
+    }
+    return history || [anyNationality];
+  }, [client, queryClient.isFetched]);
 
   const [selectNationality, setSelectedNationality] = React.useState(
     nationalityOptions[0],

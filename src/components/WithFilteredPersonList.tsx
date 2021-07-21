@@ -22,10 +22,10 @@ export const WithFilteredPersonList: React.FunctionComponent<WithFilteredPersonL
 
     const sortOrder = useSortContext()[0];
 
-    React.useEffect(() => {
-      console.log('selectedGender:', filters.gender);
-      console.log('selectedNationality:', filters.nationality);
-    }, [filters.gender, filters.nationality]);
+    // React.useEffect(() => {
+      // console.log('selectedGender:', filters.gender);
+      // console.log('selectedNationality:', filters.nationality);
+    // }, [filters.gender, filters.nationality]);
 
     return children({
       personList: orderPersonList(

@@ -60,7 +60,6 @@ export const usePersonQueryWithConfig = (
   queryOptions?: PersonListQueryOptionsPaged,
   fetchOptions?: AxiosRequestConfig,
 ) => {
-  console.log('fetchOptions:', fetchOptions?.params.page);
   return useQuery({
     queryKey: ['person', String(fetchOptions?.params?.page)],
     queryFn: ({ queryKey, pageParam }) => {
