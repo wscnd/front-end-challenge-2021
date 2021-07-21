@@ -1,5 +1,6 @@
 import {
   UsePersonListInfinite,
+  UsePersonListPaged
 } from './PersonQuery';
 
 export type WithRouterPeopleListQueryType = {
@@ -10,3 +11,11 @@ export type WithRouterPeopleListQueryType = {
   };
 };
 
+export type WithRouterPeopleListQueryTypePaged = {
+  query: UsePersonListPaged;
+  actions: {
+    ["fetchNextPage"]: () => void ,
+    ["fetchPreviousPage"]: () => void
+    ["fetchPage"]: (page: number) => void
+  };
+};

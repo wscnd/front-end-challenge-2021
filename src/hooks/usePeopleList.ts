@@ -4,6 +4,7 @@ import type { Person } from '../lib/types/Person';
 import type { QueryResult } from '../lib/types/QueryResult';
 import type {
   PersonListQueryOptionsInfinite,
+  PersonListQueryOptionsPaged,
 } from '../lib/types/PersonQuery';
 import { AxiosRequestConfig } from 'axios';
 
@@ -55,3 +56,19 @@ export const usePeopleListWithConfigInfinite = (
   });
 };
 
+export const usePeopleListWithConfigPaged = (
+  queryOptions?: PersonListQueryOptionsPaged,
+  fetchOptions?: AxiosRequestConfig,
+) => {
+  console.log('fetchOptions:', fetchOptions?.params.page);
+  return useQuery({
+    queryKey: ['people', fetchOptions?.params?.page],
+    queryFn: ({ queryKey, pageParam }) =>
+      fetchPeopleWithOptions({
+        fetchOptions,
+        queryKey,
+        pageParam,
+      }),
+    ...queryOptions,
+  });
+};
