@@ -15,7 +15,6 @@ const WithPersonListQuery: React.FunctionComponent<WithPersonListQueryProps> =
     /**
      * NOTE: PageQueryParams Related
      **/
-
     const page = useSearchParams('page').page ?? '1';
     const { pageFromUrlParam, setPageFromUrlParam, verifyPageNumber } =
       usePageNumberFromParams(page, maxPageNumber);
@@ -48,6 +47,9 @@ const WithPersonListQuery: React.FunctionComponent<WithPersonListQueryProps> =
       },
     );
 
+    /**
+     * NOTE: Controls to fetch next/previous page or specific page
+     **/
     const fetchPage = React.useCallback(
       async (page: number) => {
         setPageFromUrlParam(() => {

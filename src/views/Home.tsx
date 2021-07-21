@@ -16,6 +16,9 @@ import type { Person } from '../lib/types/Person';
 import type { QueryResult } from '../lib/types/QueryResult';
 
 const Home = () => {
+  /**
+   * NOTE: PageQueryParams Related
+   **/
   const page = useSearchParams('page').page ?? '1';
 
   const maxPageNumber = React.useState(5)[0];
@@ -27,9 +30,9 @@ const Home = () => {
     setPageFromUrlParam(verifyPageNumber(page));
   }, [maxPageNumber, page, verifyPageNumber, setPageFromUrlParam]);
 
-  const [search, setSearch] = React.useState('');
-
-  // NOTE: Gender options
+  /**
+   * NOTE: Gender options
+   **/
   const genderOptions = React.useState(() => [
     { id: 1, name: 'Male', value: 'male' },
     { id: 2, name: 'Female', value: 'female' },
@@ -38,8 +41,11 @@ const Home = () => {
 
   const [selectedGender, setSelectedGender] = React.useState(genderOptions[2]);
 
-  // NOTE: Nationality options, this is intense and probably overkill but it updates on every fetch to get a new list of nationalities
-  //
+  /**
+   * NOTE: Nationality options
+   * this is intense and probably overkill
+   * it updates on every fetch to get a new list of nationalities that are returned by the query
+   **/
   const queryClient = useQuery<QueryResult>(['person', pageFromUrlParam]);
   const client = useQueryClient();
   const nationalityOptions = React.useMemo(() => {
@@ -77,6 +83,10 @@ const Home = () => {
     nationalityOptions[0],
   );
 
+  /**
+   * NOTE: search typed by the user
+   **/
+  const [search, setSearch] = React.useState('');
   return (
     <React.Fragment>
       <section className="mb-6 w-full">
