@@ -7,6 +7,7 @@ import { PersonList } from '../components/PersonList';
 import { Select } from '../components/Select';
 import { ShowLoading } from '../components/ShowLoading';
 import { ShowRefreshing } from '../components/ShowRefreshing';
+import { WithFilteredPersonList } from '../components/WithFilteredPersonList';
 import { WithPersonListQuery } from '../components/WithPersonListQuery';
 import { SortContextProvider } from '../context/SortContext';
 import { useSearchParams } from '../hooks/useSearchParams';
@@ -114,14 +115,18 @@ const Home = () => {
               <section>
                 {query.data ? (
                   <SortContextProvider>
-                    <PeopleList
-                      search={search}
+                    <WithFilteredPersonList
                       pages={query.data}
-                      filter={{
+                      filters={{
                         gender: selectedGender.value,
                         nationality: selectNationality.value,
+                        search: search,
                       }}
-                    />
+                    >
+                      {({ personList }) => (
+                        <PersonList personList={personList} />
+                      )}
+                    </WithFilteredPersonList>
                   </SortContextProvider>
                 ) : null}
                 <ShowLoading
