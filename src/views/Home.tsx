@@ -1,9 +1,8 @@
 import { RefreshIcon, SearchIcon } from '@heroicons/react/solid';
 import * as React from 'react';
 import { DebounceInput } from 'react-debounce-input';
-import { useInfiniteQuery } from 'react-query';
-import { useHistory } from 'react-router-dom';
-import { Button } from '../components/Button';
+import { useQuery } from 'react-query';
+import { Pagination } from '../components/Pagination';
 import { PeopleList } from '../components/PeopleList';
 import { Select } from '../components/Select';
 import { ShowLoading } from '../components/ShowLoading';
@@ -15,13 +14,11 @@ import type { Person } from '../lib/types/Person';
 import type { QueryResult } from '../lib/types/QueryResult';
 
 const Home = () => {
-  const { page } = useSearchParams('page');
-
-  const history = useHistory();
+  const page = useSearchParams('page').page ?? '1';
 
   const [search, setSearch] = React.useState('');
 
-  const queryClient = useInfiniteQuery<QueryResult>('people');
+  const queryClient = useQuery<QueryResult>(['people', page]);
 
   // NOTE: Gender options
   const genderOptions = React.useState(() => [
@@ -36,11 +33,8 @@ const Home = () => {
   const nationalityOptions = React.useMemo(() => {
     const anyNationality = { name: 'Any', value: '', id: 0 };
     return Object.values(
-      queryClient.data?.pages
-        .reduce(
-          (store: Person[], current) => [...store, ...current.results],
-          [],
-        )
+      queryClient.data?.results
+        .reduce((store: Person[], current) => [...store, current], [])
         .reduce(
           (store, person) => ({
             ...store,
@@ -53,25 +47,11 @@ const Home = () => {
           { any: anyNationality },
         ) || [anyNationality],
     )?.map((value, index) => ({ ...value, id: index }));
-  }, [queryClient.data?.pages]);
+  }, [queryClient.data?.results]);
 
   const [selectNationality, setSelectedNationality] = React.useState(
     nationalityOptions[0],
   );
-
-  React.useEffect(() => {
-    console.log('nationalityOptions:', nationalityOptions);
-  }, [nationalityOptions]);
-
-  React.useEffect(() => {
-    console.log('selectNationality:', selectNationality);
-  }, [selectNationality]);
-
-  React.useEffect(() => {
-    // const pageFromParam = page ? `page=${page}` : '';
-    // console.log('pageFromParam:', pageFromParam);
-    // console.log('gender: ', selected);
-  }, [selectedGender, history, page]);
 
   return (
     <React.Fragment>
@@ -83,6 +63,7 @@ const Home = () => {
           neque culpa aut nam?
         </span>
       </section>
+
       <section className="grid grid-cols-2 grid-rows-2 mb-8 md:grid-cols-5 md:grid-rows-1  md:gap-6 gap-3">
         <div className="flex items-end col-start-1 col-end-3  md:col-end-4 ">
           <div className="relative bottom-0 w-full text-gray-400 focus-within:text-gray-600">
@@ -118,6 +99,7 @@ const Home = () => {
           />
         </div>
       </section>
+
       <WithRouterPeopleListQuery>
         {({ query, actions }) => {
           return (
@@ -125,19 +107,16 @@ const Home = () => {
               <div className="fixed flex items-center pointer-events-none bottom-6 right-6">
                 <ShowRefreshing
                   Icon={RefreshIcon}
-                  show={
-                    query.isFetching &&
-                    !query.isFetchingNextPage &&
-                    !query.isLoading
-                  }
+                  show={query.isFetching && !query.isLoading}
                 />
               </div>
+
               <section>
-                {query.data?.pages ? (
+                {query.data ? (
                   <SortContextProvider>
                     <PeopleList
                       search={search}
-                      pages={query.data.pages}
+                      pages={query.data}
                       filter={{
                         gender: selectedGender.value,
                         nationality: selectNationality.value,
@@ -152,20 +131,17 @@ const Home = () => {
                 />
               </section>
 
-              <div className="flex justify-center w-full h-10">
-                {!query.isFetchingNextPage && !query.isLoading ? (
-                  <Button
-                    disabled={query.isFetching}
-                    onClick={actions.fetchMorePeople}
-                    text={'Fetch More?'}
-                  />
-                ) : (
-                  <ShowLoading
-                    Icon={RefreshIcon}
-                    show={query.isFetchingNextPage}
-                    text={'Loading More...'}
-                  />
-                )}
+              <div className=" w-full h-10">
+                {!query.isLoading ? (
+                  <React.Fragment>
+                    <Pagination
+                      currentPage={page}
+                      actions={actions}
+                      maxPages={5}
+                      isFetching={query.isFetching || query.isLoading}
+                    />
+                  </React.Fragment>
+                ) : null}
               </div>
             </div>
           );

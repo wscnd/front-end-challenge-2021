@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { useSortContext } from '../context/SortContext';
 import type { Person } from '../lib/types/Person';
-import type { PersonPage } from '../lib/types/PersonQuery';
+import { QueryResult } from '../lib/types/QueryResult';
 import {
   filterByGender,
   filterByName,
@@ -14,7 +14,7 @@ import { Table, TableBody } from './Table';
 type PeopleListProps = React.FunctionComponent<{
   search: string;
   filter: { gender: string; nationality: string };
-  pages: PersonPage;
+  pages: QueryResult;
 }>;
 
 const PeopleList: PeopleListProps = ({ pages, search, filter }) => {
@@ -28,14 +28,6 @@ const PeopleList: PeopleListProps = ({ pages, search, filter }) => {
     setSelectedPersonInfo(person);
   }, []);
 
-  React.useEffect(() => {
-    console.log('sort Order', sortOrder);
-  }, [sortOrder]);
-
-  React.useEffect(() => {
-    console.log('filters:', filter);
-  }, [filter]);
-
   return (
     <React.Fragment>
       <Table>
@@ -43,10 +35,7 @@ const PeopleList: PeopleListProps = ({ pages, search, filter }) => {
           actions={{ view: viewAction }}
           personList={orderPersonList(
             //NOTE: probably expensive?
-            pages.reduce(
-              (store: Person[], current) => [...store, ...current.results],
-              [],
-            ),
+            pages.results,
             sortOrder.order,
             'name',
           )
