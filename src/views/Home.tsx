@@ -10,6 +10,7 @@ import { ShowRefreshing } from '../components/ShowRefreshing';
 import { WithFilteredPersonList } from '../components/WithFilteredPersonList';
 import { WithPersonListQuery } from '../components/WithPersonListQuery';
 import { SortContextProvider } from '../context/SortContext';
+import { usePageNumberFromParams } from '../hooks/usePageNumberFromParams';
 import { useSearchParams } from '../hooks/useSearchParams';
 import type { Person } from '../lib/types/Person';
 import type { QueryResult } from '../lib/types/QueryResult';
@@ -17,10 +18,16 @@ import type { QueryResult } from '../lib/types/QueryResult';
 const Home = () => {
   const page = useSearchParams('page').page ?? '1';
 
-  const [search, setSearch] = React.useState('');
+  const maxPageNumber = React.useState(5)[0];
 
-  const queryClient = useQuery<QueryResult>(['person', page]);
-  const client = useQueryClient();
+  const { pageFromUrlParam, setPageFromUrlParam, verifyPageNumber } =
+    usePageNumberFromParams(page, maxPageNumber);
+
+  React.useEffect(() => {
+    setPageFromUrlParam(verifyPageNumber(page));
+  }, [maxPageNumber, page, verifyPageNumber, setPageFromUrlParam]);
+
+  const [search, setSearch] = React.useState('');
 
   // NOTE: Gender options
   const genderOptions = React.useState(() => [
@@ -30,7 +37,11 @@ const Home = () => {
   ])[0];
 
   const [selectedGender, setSelectedGender] = React.useState(genderOptions[2]);
+
   // NOTE: Nationality options, this is intense and probably overkill but it updates on every fetch to get a new list of nationalities
+  //
+  const queryClient = useQuery<QueryResult>(['person', pageFromUrlParam]);
+  const client = useQueryClient();
   const nationalityOptions = React.useMemo(() => {
     const anyNationality = { name: 'Any', value: '', id: 0 };
     let history;
@@ -113,7 +124,7 @@ const Home = () => {
         </div>
       </section>
 
-      <WithPersonListQuery>
+      <WithPersonListQuery maxPageNumber={maxPageNumber}>
         {({ query, actions }) => {
           return (
             <div className="mb-6">
@@ -152,10 +163,10 @@ const Home = () => {
                 {!query.isLoading ? (
                   <React.Fragment>
                     <Pagination
-                      currentPage={page}
+                      currentPage={pageFromUrlParam}
                       actions={actions}
-                      maxPages={5}
-                      isFetching={query.isFetching || query.isLoading}
+                      maxPages={maxPageNumber}
+                      isFetching={query.isFetching || query.isLoading} // NOTE: not being used
                     />
                   </React.Fragment>
                 ) : null}

@@ -1,22 +1,33 @@
 import * as React from 'react';
+import { useHistory } from 'react-router-dom';
+import { usePageNumberFromParams } from '../hooks/usePageNumberFromParams';
 import { usePersonQueryWithConfig } from '../hooks/usePersonList';
 import { useSearchParams } from '../hooks/useSearchParams';
 import type { WithPersonListQueryType } from '../lib/types/WithPersonListQueryType';
 
 type WithPersonListQueryProps = {
+  maxPageNumber: number;
   children: React.FunctionComponent<WithPersonListQueryType>;
 };
 
 const WithPersonListQuery: React.FunctionComponent<WithPersonListQueryProps> =
-  ({ children }) => {
+  ({ children, maxPageNumber }) => {
     /**
      * NOTE: PageQueryParams Related
      **/
 
     const page = useSearchParams('page').page ?? '1';
-    const [pageFromUrlParam, setPageFromUrlParam] = React.useState(() => {
-      return page;
-    });
+    const { pageFromUrlParam, setPageFromUrlParam, verifyPageNumber } =
+      usePageNumberFromParams(page, maxPageNumber);
+
+    const history = useHistory();
+
+    React.useEffect(() => {
+      history.replace({
+        pathname: '/',
+        search: `?page=${verifyPageNumber(page)}`,
+      });
+    }, [history, page, pageFromUrlParam, verifyPageNumber]);
 
     /**
      * NOTE: PersonQuery Related
@@ -37,23 +48,26 @@ const WithPersonListQuery: React.FunctionComponent<WithPersonListQueryProps> =
       },
     );
 
-    const fetchPage = React.useCallback(async (page: number) => {
-      setPageFromUrlParam(() => {
-        return String(page);
-      });
-    }, []);
+    const fetchPage = React.useCallback(
+      async (page: number) => {
+        setPageFromUrlParam(() => {
+          return String(page);
+        });
+      },
+      [setPageFromUrlParam],
+    );
 
     const fetchPreviousPage = React.useCallback(async () => {
       setPageFromUrlParam((previous) => {
         return String(Number(previous) - 1);
       });
-    }, []);
+    }, [setPageFromUrlParam]);
 
     const fetchNextPage = React.useCallback(async () => {
       setPageFromUrlParam((previous) => {
         return String(Number(previous) + 1);
       });
-    }, []);
+    }, [setPageFromUrlParam]);
 
     return children({
       query: personQuery,
