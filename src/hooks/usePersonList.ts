@@ -8,7 +8,7 @@ import type {
 } from '../lib/types/PersonQuery';
 import { AxiosRequestConfig } from 'axios';
 
-export const fetchPeople = () => {
+export const fetchPerson = () => {
   return api.get('').then((response) => response.data.results);
 };
 
@@ -16,7 +16,7 @@ type FetchPeopleWithOptions = Partial<QueryFunctionContext> & {
   fetchOptions?: AxiosRequestConfig;
 };
 
-export const fetchPeopleWithOptions = ({
+export const fetchPersonWithOptions = ({
   pageParam,
   //eslint-disable-next-line @typescript-eslint/no-unused-vars
   queryKey,
@@ -37,17 +37,17 @@ export const fetchPeopleWithOptions = ({
 };
 
 export const usePeopleList = () => {
-  return useQuery<Person[]>('people', fetchPeople);
+  return useQuery<Person[]>('person', fetchPerson);
 };
 
-export const usePeopleListWithConfigInfinite = (
+export const usePersonInfiniteQueryWithConfig = (
   queryOptions?: PersonListQueryOptionsInfinite,
   fetchOptions?: AxiosRequestConfig,
 ) => {
   return useInfiniteQuery({
-    queryKey: ['people'],
+    queryKey: ['person'],
     queryFn: ({ queryKey, pageParam }) =>
-      fetchPeopleWithOptions({
+      fetchPersonWithOptions({
         fetchOptions,
         queryKey,
         pageParam,
@@ -56,15 +56,15 @@ export const usePeopleListWithConfigInfinite = (
   });
 };
 
-export const usePeopleListWithConfigPaged = (
+export const usePersonQueryWithConfig = (
   queryOptions?: PersonListQueryOptionsPaged,
   fetchOptions?: AxiosRequestConfig,
 ) => {
   console.log('fetchOptions:', fetchOptions?.params.page);
   return useQuery({
-    queryKey: ['people', String(fetchOptions?.params?.page)],
+    queryKey: ['person', String(fetchOptions?.params?.page)],
     queryFn: ({ queryKey, pageParam }) => {
-      return fetchPeopleWithOptions({ fetchOptions, queryKey, pageParam });
+      return fetchPersonWithOptions({ fetchOptions, queryKey, pageParam });
     },
     ...queryOptions,
   });

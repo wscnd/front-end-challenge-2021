@@ -4,11 +4,11 @@ import {
 } from '@heroicons/react/solid';
 import * as React from 'react';
 import { Link } from 'react-router-dom';
-import { WithRouterPeopleListQueryTypePaged } from '../lib/types/WithRouterPeopleListQuery';
+import type { WithPersonListQueryType } from '../lib/types/WithPersonListQueryType';
 
 type PaginationProps = {
   currentPage: string | null;
-  actions: WithRouterPeopleListQueryTypePaged['actions'];
+  actions: WithPersonListQueryType['actions'];
   maxPages: number;
   isFetching: boolean;
 };

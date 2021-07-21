@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import type { SetState } from '../lib/types/SetState';
-import { Person } from '../lib/types/Person';
+import type { Person } from '../lib/types/Person';
 import { XIcon } from '@heroicons/react/solid';
 
 type DisplayPersonProps = {

@@ -1,18 +1,18 @@
 import { InfiniteData, UseInfiniteQueryOptions, UseQueryOptions } from 'react-query';
 import {
-  usePeopleListWithConfigInfinite,
-  usePeopleListWithConfigPaged 
-} from '../../hooks/usePeopleList';
+  usePersonInfiniteQueryWithConfig,
+  usePersonQueryWithConfig
+} from '../../hooks/usePersonList';
 import { QueryResult } from './QueryResult';
 
 export type PersonListQueryOptionsInfinite = UseInfiniteQueryOptions<QueryResult>;
 export type PersonListQueryOptionsPaged = UseQueryOptions<QueryResult>;
 
-export type UsePersonListInfinite = ReturnType<typeof usePeopleListWithConfigInfinite>;
-export type UsePersonListPaged = ReturnType<typeof usePeopleListWithConfigPaged>;
+export type UsePersonListInfinite = ReturnType<typeof usePersonInfiniteQueryWithConfig>;
+export type UsePersonListPaged = ReturnType<typeof usePersonQueryWithConfig>;
 
 export type PersonPage = InfiniteData<QueryResult>["pages"]
 
-export type PersonPagePaged = ReturnType<typeof usePeopleListWithConfigPaged>;
+export type PersonPagePaged = ReturnType<typeof usePersonQueryWithConfig>;
 
 export type PersonInfiniteData = InfiniteData<QueryResult>

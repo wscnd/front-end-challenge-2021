@@ -3,11 +3,11 @@ import * as React from 'react';
 import { DebounceInput } from 'react-debounce-input';
 import { useQuery } from 'react-query';
 import { Pagination } from '../components/Pagination';
-import { PeopleList } from '../components/PeopleList';
+import { PersonList } from '../components/PersonList';
 import { Select } from '../components/Select';
 import { ShowLoading } from '../components/ShowLoading';
 import { ShowRefreshing } from '../components/ShowRefreshing';
-import { WithRouterPeopleListQuery } from '../components/WithRouterPeopleListQuery';
+import { WithPersonListQuery } from '../components/WithPersonListQuery';
 import { SortContextProvider } from '../context/SortContext';
 import { useSearchParams } from '../hooks/useSearchParams';
 import type { Person } from '../lib/types/Person';
@@ -18,7 +18,7 @@ const Home = () => {
 
   const [search, setSearch] = React.useState('');
 
-  const queryClient = useQuery<QueryResult>(['people', page]);
+  const queryClient = useQuery<QueryResult>(['person', page]);
 
   // NOTE: Gender options
   const genderOptions = React.useState(() => [
@@ -47,7 +47,7 @@ const Home = () => {
           { any: anyNationality },
         ) || [anyNationality],
     )?.map((value, index) => ({ ...value, id: index }));
-  }, [queryClient.data?.results]);
+  }, [queryClient]);
 
   const [selectNationality, setSelectedNationality] = React.useState(
     nationalityOptions[0],
@@ -100,7 +100,7 @@ const Home = () => {
         </div>
       </section>
 
-      <WithRouterPeopleListQuery>
+      <WithPersonListQuery>
         {({ query, actions }) => {
           return (
             <div className="mb-6">
@@ -146,7 +146,7 @@ const Home = () => {
             </div>
           );
         }}
-      </WithRouterPeopleListQuery>
+      </WithPersonListQuery>
     </React.Fragment>
   );
 };

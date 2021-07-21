@@ -3,7 +3,7 @@ import {
   UsePersonListPaged
 } from './PersonQuery';
 
-export type WithRouterPeopleListQueryType = {
+export type WithPersonListInfiniteQueryType = {
   query: UsePersonListInfinite;
   actions: {
     ["fetchNextPage"]: () => void ,
@@ -11,7 +11,7 @@ export type WithRouterPeopleListQueryType = {
   };
 };
 
-export type WithRouterPeopleListQueryTypePaged = {
+export type WithPersonListQueryType = {
   query: UsePersonListPaged;
   actions: {
     ["fetchNextPage"]: () => void ,

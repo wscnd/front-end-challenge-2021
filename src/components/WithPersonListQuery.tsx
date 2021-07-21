@@ -1,13 +1,13 @@
 import * as React from 'react';
-import { usePeopleListWithConfigPaged } from '../hooks/usePeopleList';
+import { usePersonQueryWithConfig } from '../hooks/usePersonList';
 import { useSearchParams } from '../hooks/useSearchParams';
-import type { WithRouterPeopleListQueryTypePaged } from '../lib/types/WithRouterPeopleListQuery';
+import type { WithPersonListQueryType } from '../lib/types/WithPersonListQueryType';
 
-type WithRouterPeopleListQueryProps = {
-  children: React.FunctionComponent<WithRouterPeopleListQueryTypePaged>;
+type WithPersonListQueryProps = {
+  children: React.FunctionComponent<WithPersonListQueryType>;
 };
 
-const WithRouterPeopleListQuery: React.FunctionComponent<WithRouterPeopleListQueryProps> =
+const WithPersonListQuery: React.FunctionComponent<WithPersonListQueryProps> =
   ({ children }) => {
     /**
      * NOTE: PageQueryParams Related
@@ -21,7 +21,7 @@ const WithRouterPeopleListQuery: React.FunctionComponent<WithRouterPeopleListQue
     /**
      * NOTE: PersonQuery Related
      **/
-    const personQuery = usePeopleListWithConfigPaged(
+    const personQuery = usePersonQueryWithConfig(
       {
         keepPreviousData: true,
         //eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -61,4 +61,4 @@ const WithRouterPeopleListQuery: React.FunctionComponent<WithRouterPeopleListQue
     });
   };
 
-export { WithRouterPeopleListQuery };
+export { WithPersonListQuery };
