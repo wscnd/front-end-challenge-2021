@@ -1,15 +1,15 @@
 import * as React from 'react';
-import { usePeopleListWithConfig } from '../hooks/usePeopleList';
-import type { UsePersonList } from '../lib/types/PersonQuery';
+import { usePeopleListWithConfigInfinite } from '../hooks/usePeopleList';
+import type { UsePersonListInfinite } from '../lib/types/PersonQuery';
 
 type WithPeopleProp = {
-  children: React.FunctionComponent<UsePersonList>;
+  children: React.FunctionComponent<UsePersonListInfinite>;
 };
 
 const WithPeopleListQuery: React.FunctionComponent<WithPeopleProp> = ({
   children,
 }) => {
-  const peopleQuery = usePeopleListWithConfig(
+  const peopleQuery = usePeopleListWithConfigInfinite(
     {
       keepPreviousData: true,
       //eslint-disable-next-line @typescript-eslint/no-unused-vars

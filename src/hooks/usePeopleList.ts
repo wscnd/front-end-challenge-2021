@@ -2,7 +2,9 @@ import { QueryFunctionContext, useInfiniteQuery, useQuery } from 'react-query';
 import { api } from '../lib/services/api';
 import type { Person } from '../lib/types/Person';
 import type { QueryResult } from '../lib/types/QueryResult';
-import type { PersonListQueryOptions } from '../lib/types/PersonQuery';
+import type {
+  PersonListQueryOptionsInfinite,
+} from '../lib/types/PersonQuery';
 import { AxiosRequestConfig } from 'axios';
 
 export const fetchPeople = () => {
@@ -15,6 +17,7 @@ type FetchPeopleWithOptions = Partial<QueryFunctionContext> & {
 
 export const fetchPeopleWithOptions = ({
   pageParam,
+  //eslint-disable-next-line @typescript-eslint/no-unused-vars
   queryKey,
   fetchOptions,
 }: FetchPeopleWithOptions) => {
@@ -36,8 +39,8 @@ export const usePeopleList = () => {
   return useQuery<Person[]>('people', fetchPeople);
 };
 
-export const usePeopleListWithConfig = (
-  queryOptions?: PersonListQueryOptions,
+export const usePeopleListWithConfigInfinite = (
+  queryOptions?: PersonListQueryOptionsInfinite,
   fetchOptions?: AxiosRequestConfig,
 ) => {
   return useInfiniteQuery({
@@ -51,3 +54,4 @@ export const usePeopleListWithConfig = (
     ...queryOptions,
   });
 };
+

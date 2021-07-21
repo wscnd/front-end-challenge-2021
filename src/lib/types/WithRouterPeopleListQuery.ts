@@ -1,6 +1,12 @@
-import { UsePersonList } from './PersonQuery';
+import {
+  UsePersonListInfinite,
+} from './PersonQuery';
 
 export type WithRouterPeopleListQueryType = {
-  query: UsePersonList;
-  actions: { ["fetchMorePeople"]: () => void };
+  query: UsePersonListInfinite;
+  actions: {
+    ["fetchNextPage"]: () => void ,
+    ["fetchPreviousPage"]: () => void
+  };
 };
+
