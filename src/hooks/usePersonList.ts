@@ -6,7 +6,7 @@ import type {
   PersonListQueryOptionsInfinite,
   PersonListQueryOptionsPaged,
 } from '../lib/types/PersonQuery';
-import { AxiosRequestConfig } from 'axios';
+import axios, { AxiosRequestConfig } from 'axios';
 
 export const fetchPerson = () => {
   return api.get('').then((response) => response.data.results);
@@ -63,7 +63,24 @@ export const usePersonQueryWithConfig = (
   return useQuery({
     queryKey: ['person', String(fetchOptions?.params?.page)],
     queryFn: ({ queryKey, pageParam }) => {
-      return fetchPersonWithOptions({ fetchOptions, queryKey, pageParam });
+      // NOTE: this doesn't have async keyword in it
+      const source = axios.CancelToken.source();
+      const newFetchOptions = { ...fetchOptions, cancelToken: source.token };
+
+      const promise: Promise<QueryResult> & {
+        cancel?: { (): void };
+      } = new Promise((res) => setTimeout(res, 1000)).then(async () => {
+        return fetchPersonWithOptions({
+          fetchOptions: newFetchOptions,
+          queryKey,
+          pageParam,
+        });
+      });
+
+      promise.cancel = () => {
+        source.cancel('Query was cancelled by react-query');
+      };
+      return promise;
     },
     ...queryOptions,
   });
