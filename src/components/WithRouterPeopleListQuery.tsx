@@ -13,9 +13,9 @@ const WithRouterPeopleListQuery: React.FunctionComponent<WithRouterPeopleListQue
      * NOTE: PageQueryParams Related
      **/
 
-    const { page } = useSearchParams('page');
+    const page = useSearchParams('page').page ?? '1';
     const [pageFromUrlParam, setPageFromUrlParam] = React.useState(() => {
-      return page || '0';
+      return page;
     });
 
     /**
@@ -25,7 +25,9 @@ const WithRouterPeopleListQuery: React.FunctionComponent<WithRouterPeopleListQue
       {
         keepPreviousData: true,
         //eslint-disable-next-line @typescript-eslint/no-unused-vars
-        refetchOnWindowFocus: false,
+        onError: (error) => {
+          console.error('error:', error);
+        },
       },
       {
         params: {

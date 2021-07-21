@@ -62,13 +62,10 @@ export const usePeopleListWithConfigPaged = (
 ) => {
   console.log('fetchOptions:', fetchOptions?.params.page);
   return useQuery({
-    queryKey: ['people', fetchOptions?.params?.page],
-    queryFn: ({ queryKey, pageParam }) =>
-      fetchPeopleWithOptions({
-        fetchOptions,
-        queryKey,
-        pageParam,
-      }),
+    queryKey: ['people', String(fetchOptions?.params?.page)],
+    queryFn: ({ queryKey, pageParam }) => {
+      return fetchPeopleWithOptions({ fetchOptions, queryKey, pageParam });
+    },
     ...queryOptions,
   });
 };

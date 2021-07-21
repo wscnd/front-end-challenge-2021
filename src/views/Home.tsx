@@ -14,11 +14,11 @@ import type { Person } from '../lib/types/Person';
 import type { QueryResult } from '../lib/types/QueryResult';
 
 const Home = () => {
-  const { page } = useSearchParams('page');
+  const page = useSearchParams('page').page ?? '1';
 
   const [search, setSearch] = React.useState('');
 
-  const queryClient = useQuery<QueryResult>(['people', String(page ?? 0)]);
+  const queryClient = useQuery<QueryResult>(['people', page]);
 
   // NOTE: Gender options
   const genderOptions = React.useState(() => [
@@ -55,7 +55,6 @@ const Home = () => {
 
   return (
     <React.Fragment>
-
       <section className="mb-6 w-full">
         <span className="font-semibold  prose text-left lg:prose-xl md:prose-lg text-primary ">
           Lorem ipsum dolor sit, amet consectetur adipisicing elit. Quos, fuga?
@@ -144,9 +143,7 @@ const Home = () => {
                   </React.Fragment>
                 ) : null}
               </div>
-
             </div>
-
           );
         }}
       </WithRouterPeopleListQuery>
