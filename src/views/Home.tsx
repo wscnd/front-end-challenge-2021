@@ -73,7 +73,10 @@ const Home = () => {
         </span>
       </section>
 
-      <section className="grid grid-cols-2 grid-rows-2 mb-8 md:grid-cols-5 md:grid-rows-1  md:gap-6 gap-3">
+      <section
+        id="search"
+        className="grid grid-cols-2 grid-rows-2 mb-8 md:grid-cols-5 md:grid-rows-1  md:gap-6 gap-3"
+      >
         <div className="flex items-end col-start-1 col-end-3  md:col-end-4 ">
           <div className="relative bottom-0 w-full text-gray-400 focus-within:text-gray-600">
             <div className="absolute inset-y-0 flex items-center pr-3 pointer-events-none right-4">
@@ -93,14 +96,20 @@ const Home = () => {
           </div>
         </div>
 
-        <div className="md:col-start-4 flex flex-col justify-end">
+        <div
+          id="search-filter"
+          className="md:col-start-4 flex flex-col justify-end"
+        >
           <Select
             selectOptions={[selectNationality, setSelectedNationality]}
             options={nationalityOptions}
             labelText={'Nationality'}
           />
         </div>
-        <div className="md:col-start-5 flex flex-col justify-end">
+        <div
+          id="search-filter"
+          className="md:col-start-5 flex flex-col justify-end"
+        >
           <Select
             selectOptions={[selectedGender, setSelectedGender]}
             options={genderOptions}
@@ -136,7 +145,7 @@ const Home = () => {
               <section>
                 <ShowLoading
                   Icon={RefreshIcon}
-                  show={
+                  showLoading={
                     query.isFetching && !query.isLoading && !query.isFetched
                   }
                   text={'Loading more...'}
@@ -160,7 +169,7 @@ const Home = () => {
                 </ShowLoading>
                 <ShowLoading
                   Icon={RefreshIcon}
-                  show={query.isLoading}
+                  showLoading={query.isLoading}
                   text={'Loading...'}
                 />
               </section>
