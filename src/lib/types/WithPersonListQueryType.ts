@@ -13,7 +13,7 @@ export type WithPersonListInfiniteQueryType = {
 
 export type WithPersonListQueryType = {
   query: UsePersonListPaged;
-  actions: {
+  queryActions: {
     ["fetchNextPage"]: () => void ,
     ["fetchPreviousPage"]: () => void
     ["fetchPage"]: (page: number) => void

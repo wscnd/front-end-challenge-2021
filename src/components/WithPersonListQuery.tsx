@@ -1,23 +1,23 @@
 import * as React from 'react';
 import { useHistory } from 'react-router-dom';
-import { usePageNumberFromParams } from '../hooks/usePageNumberFromParams';
+import { useCurrentPageFromParams } from '../hooks/useCurrentPageFromParams';
 import { usePersonQueryWithConfig } from '../hooks/usePersonList';
 import { useSearchParams } from '../hooks/useSearchParams';
 import type { WithPersonListQueryType } from '../lib/types/WithPersonListQueryType';
 
 type WithPersonListQueryProps = {
-  maxPageNumber: number;
+  maxPages: number;
   children: React.FunctionComponent<WithPersonListQueryType>;
 };
 
 const WithPersonListQuery: React.FunctionComponent<WithPersonListQueryProps> =
-  ({ children, maxPageNumber }) => {
+  ({ children, maxPages  }) => {
     /**
-     * NOTE: PageQueryParams Related
+   * NOTE: /?page${page} is used to get  the page number from the URL
      **/
     const page = useSearchParams('page').page ?? '1';
-    const { pageFromUrlParam, setPageFromUrlParam, verifyPageNumber } =
-      usePageNumberFromParams(page, maxPageNumber);
+    const { currentPage , setCurrentPage , validateCurrentPage  } =
+      useCurrentPageFromParams(page, maxPages);
 
     const history = useHistory();
 
@@ -29,14 +29,14 @@ const WithPersonListQuery: React.FunctionComponent<WithPersonListQueryProps> =
     }, [history.action, history]);
 
     React.useEffect(() => {
-      const currentPageNumber = verifyPageNumber(pageFromUrlParam);
+      const currentPageNumber = validateCurrentPage(currentPage);
       if (currentPageNumber !== '1') {
         history.replace({
           pathname: '/',
-          search: `?page=${verifyPageNumber(pageFromUrlParam)}`,
+          search: `?page=${validateCurrentPage(currentPage)}`,
         });
       }
-    }, [history, verifyPageNumber, pageFromUrlParam]);
+    }, [history, validateCurrentPage, currentPage]);
 
     /**
      * NOTE: PersonQuery Related
@@ -52,7 +52,7 @@ const WithPersonListQuery: React.FunctionComponent<WithPersonListQueryProps> =
       {
         params: {
           results: 50,
-          page: pageFromUrlParam,
+          page: currentPage,
         },
       },
     );
@@ -62,28 +62,28 @@ const WithPersonListQuery: React.FunctionComponent<WithPersonListQueryProps> =
      **/
     const fetchPage = React.useCallback(
       async (page: number) => {
-        setPageFromUrlParam(() => {
+        setCurrentPage(() => {
           return String(page);
         });
       },
-      [setPageFromUrlParam],
+      [setCurrentPage],
     );
 
     const fetchPreviousPage = React.useCallback(async () => {
-      setPageFromUrlParam((previous) => {
+      setCurrentPage((previous) => {
         return String(Number(previous) - 1);
       });
-    }, [setPageFromUrlParam]);
+    }, [setCurrentPage]);
 
     const fetchNextPage = React.useCallback(async () => {
-      setPageFromUrlParam((previous) => {
+      setCurrentPage((previous) => {
         return String(Number(previous) + 1);
       });
-    }, [setPageFromUrlParam]);
+    }, [setCurrentPage]);
 
     return children({
       query: personQuery,
-      actions: { fetchNextPage, fetchPreviousPage, fetchPage },
+      queryActions: { fetchNextPage, fetchPreviousPage, fetchPage },
     });
   };
 

@@ -2,22 +2,22 @@ import { Transition } from '@headlessui/react';
 import * as React from 'react';
 
 type ShowLoadingProps = {
-  show: boolean;
+  showLoading: boolean;
   Icon: (props: React.ComponentProps<'svg'>) => JSX.Element;
   text: string;
 };
 
 const ShowLoading: React.FunctionComponent<ShowLoadingProps> = ({
   Icon,
-  show,
+  showLoading,
   text,
   children,
 }) => {
   return (
     <React.Fragment>
-      {show ? (
+      {showLoading ? (
         <Transition
-          show={show}
+          show={showLoading}
           enter="transition ease-out duration-800"
           enterFrom="transform opacity-0 "
           enterTo="transform opacity-100 "

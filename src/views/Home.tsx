@@ -10,28 +10,27 @@ import { ShowRefreshing } from '../components/ShowRefreshing';
 import { WithFilteredPersonList } from '../components/WithFilteredPersonList';
 import { WithPersonListQuery } from '../components/WithPersonListQuery';
 import { SortContextProvider } from '../context/SortContext';
-import { usePageNumberFromParams } from '../hooks/usePageNumberFromParams';
+import { useCurrentPageFromParams } from '../hooks/useCurrentPageFromParams';
 import { useSearchParams } from '../hooks/useSearchParams';
 
 const Home = () => {
   /**
-   * NOTE: PageQueryParams Related
+   * NOTE: /?page${page} is used to get  the page number from the URL
    **/
   const page = useSearchParams('page').page ?? '1';
 
-  const maxPageNumber = React.useState(5)[0];
+  const maxPages = React.useState(5)[0];
 
-  const { pageFromUrlParam, setPageFromUrlParam, verifyPageNumber } =
-    usePageNumberFromParams(page, maxPageNumber);
+  const { currentPage, setCurrentPage, validateCurrentPage } =
+    useCurrentPageFromParams(page, maxPages);
 
   React.useEffect(() => {
-    setPageFromUrlParam(verifyPageNumber(page));
-  }, [maxPageNumber, page, verifyPageNumber, setPageFromUrlParam]);
+    setCurrentPage(validateCurrentPage(page));
+  }, [maxPages, page, validateCurrentPage, setCurrentPage]);
 
   /**
-   * NOTE: Gender options
+   * NOTE: Gender filter options
    **/
-
   const [genderOptions, setGenderOptions] = React.useState([
     {
       name: 'Any',
@@ -42,11 +41,11 @@ const Home = () => {
   const [selectedGender, setSelectedGender] = React.useState(genderOptions[0]);
 
   /**
-   * NOTE: Nationality options
+   * NOTE: Nationality filter options
    * this is intense and probably overkill
-   * it updates on every fetch to get a new list of nationalities that are returned by the query
+   * it updates on every rendered table to get a new list of nationalities that are returned by the query
+   * and used in the table
    **/
-
   const [nationalityOptions, setNationalityOptions] = React.useState([
     {
       name: 'Any',
@@ -60,7 +59,7 @@ const Home = () => {
   );
 
   /**
-   * NOTE: search typed by the user
+   * NOTE: Search typed by the user
    **/
   const [search, setSearch] = React.useState('');
   return (
@@ -74,7 +73,10 @@ const Home = () => {
         </span>
       </section>
 
-      <section className="grid grid-cols-2 grid-rows-2 mb-8 md:grid-cols-5 md:grid-rows-1  md:gap-6 gap-3">
+      <section
+        id="search"
+        className="grid grid-cols-2 grid-rows-2 mb-8 md:grid-cols-5 md:grid-rows-1  md:gap-6 gap-3"
+      >
         <div className="flex items-end col-start-1 col-end-3  md:col-end-4 ">
           <div className="relative bottom-0 w-full text-gray-400 focus-within:text-gray-600">
             <div className="absolute inset-y-0 flex items-center pr-3 pointer-events-none right-4">
@@ -94,14 +96,20 @@ const Home = () => {
           </div>
         </div>
 
-        <div className="md:col-start-4 flex flex-col justify-end">
+        <div
+          id="search-filter"
+          className="md:col-start-4 flex flex-col justify-end"
+        >
           <Select
             selectOptions={[selectNationality, setSelectedNationality]}
             options={nationalityOptions}
             labelText={'Nationality'}
           />
         </div>
-        <div className="md:col-start-5 flex flex-col justify-end">
+        <div
+          id="search-filter"
+          className="md:col-start-5 flex flex-col justify-end"
+        >
           <Select
             selectOptions={[selectedGender, setSelectedGender]}
             options={genderOptions}
@@ -110,16 +118,15 @@ const Home = () => {
         </div>
       </section>
 
-      <WithPersonListQuery maxPageNumber={maxPageNumber}>
-        {({ query, actions }) => {
+      {/* Everything below this uses the PersonQuery */}
+      <WithPersonListQuery maxPages={maxPages}>
+        {({ query, queryActions }) => {
           return (
             <div className="mb-6">
               <div className="fixed flex items-center pointer-events-none bottom-6 right-6">
                 <ShowRefreshing
                   Icon={RefreshIcon}
-                  show={
-                    query.isFetching && !query.isLoading && query.isFetched
-                  }
+                  show={query.isFetching && !query.isLoading && query.isFetched}
                 />
               </div>
 
@@ -138,7 +145,7 @@ const Home = () => {
               <section>
                 <ShowLoading
                   Icon={RefreshIcon}
-                  show={
+                  showLoading={
                     query.isFetching && !query.isLoading && !query.isFetched
                   }
                   text={'Loading more...'}
@@ -162,7 +169,7 @@ const Home = () => {
                 </ShowLoading>
                 <ShowLoading
                   Icon={RefreshIcon}
-                  show={query.isLoading}
+                  showLoading={query.isLoading}
                   text={'Loading...'}
                 />
               </section>
@@ -171,9 +178,9 @@ const Home = () => {
                 {!query.isLoading ? (
                   <React.Fragment>
                     <Pagination
-                      currentPage={pageFromUrlParam}
-                      actions={actions}
-                      maxPages={maxPageNumber}
+                      currentPage={currentPage}
+                      actions={queryActions}
+                      maxPages={maxPages}
                       isFetching={query.isFetching || query.isLoading} // NOTE: not being used
                     />
                   </React.Fragment>
