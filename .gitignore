@@ -1,2 +1,5 @@
-
-.vscode/settings.json
+.npm
+.dist
+.env*
+.vscode/*
+.unotes/*
