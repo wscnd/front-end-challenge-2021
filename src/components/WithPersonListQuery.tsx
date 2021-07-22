@@ -13,7 +13,7 @@ type WithPersonListQueryProps = {
 const WithPersonListQuery: React.FunctionComponent<WithPersonListQueryProps> =
   ({ children, maxPages  }) => {
     /**
-     * NOTE: PageQueryParams Related
+   * NOTE: /?page${page} is used to get  the page number from the URL
      **/
     const page = useSearchParams('page').page ?? '1';
     const { currentPage , setCurrentPage , validateCurrentPage  } =

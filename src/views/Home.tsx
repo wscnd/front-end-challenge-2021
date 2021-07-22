@@ -15,7 +15,7 @@ import { useSearchParams } from '../hooks/useSearchParams';
 
 const Home = () => {
   /**
-   * NOTE: PageQueryParams Related
+   * NOTE: /?page${page} is used to get  the page number from the URL
    **/
   const page = useSearchParams('page').page ?? '1';
 
@@ -29,9 +29,8 @@ const Home = () => {
   }, [maxPages, page, validateCurrentPage, setCurrentPage]);
 
   /**
-   * NOTE: Gender options
+   * NOTE: Gender filter options
    **/
-
   const [genderOptions, setGenderOptions] = React.useState([
     {
       name: 'Any',
@@ -42,11 +41,11 @@ const Home = () => {
   const [selectedGender, setSelectedGender] = React.useState(genderOptions[0]);
 
   /**
-   * NOTE: Nationality options
+   * NOTE: Nationality filter options
    * this is intense and probably overkill
-   * it updates on every fetch to get a new list of nationalities that are returned by the query
+   * it updates on every rendered table to get a new list of nationalities that are returned by the query
+   * and used in the table
    **/
-
   const [nationalityOptions, setNationalityOptions] = React.useState([
     {
       name: 'Any',
@@ -60,7 +59,7 @@ const Home = () => {
   );
 
   /**
-   * NOTE: search typed by the user
+   * NOTE: Search typed by the user
    **/
   const [search, setSearch] = React.useState('');
   return (
@@ -110,6 +109,7 @@ const Home = () => {
         </div>
       </section>
 
+      {/* Everything below this uses the PersonQuery */}
       <WithPersonListQuery maxPages={maxPages}>
         {({ query, actions }) => {
           return (

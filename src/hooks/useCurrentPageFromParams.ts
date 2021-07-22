@@ -5,7 +5,7 @@ const useCurrentPageFromParams = (page: string, maxPageNumber: number) => {
     (page: string) => {
       const pageToNumber = Number(page);
       if (pageToNumber < 1 || Number.isNaN(pageToNumber))
-        /* NaN case for letters */ return '1';
+        /* NaN fallback case for letters */ return '1';
       if (pageToNumber > maxPageNumber) return maxPageNumber.toString();
       return page;
     },
