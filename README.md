@@ -2,7 +2,7 @@
 
 ## Introdução
 
-Este é desafio para testar os conhecimentos de Front-end;
+Este é um desafio para testar os conhecimentos de Front-end;
 
 O objetivo é avaliar a forma de estruturação e autonomia em decisões para construir algo escalável utilizando um framework moderno javascript.
 
@@ -76,21 +76,27 @@ Além do desafio proposto com as duas telas, temos alguns diferenciais:
 ## Proposta
 
 ### Tela inicial
+
 ![Homepage](assets/previews/home.png)
 
 ### Ver usuário
+
 ![View Person](assets/previews/view-person.png)
 
 ### Filtros
+
 ![Filters](assets/previews/filters.png)
 
 ### Primeiro load da página inicial
+
 ![Loading](assets/previews/loading-list.png)
 
 ### Load de uma rota (não cacheada)
+
 ![loading more](assets/previews/on-route-change.png)
 
 ### Background load
+
 ![background loading](assets/previews/background-fetch.png)
 
 ## Tech stack
@@ -98,16 +104,13 @@ Além do desafio proposto com as duas telas, temos alguns diferenciais:
 * Framework
     * React
     * React-Router-DOM
-
 * Style
     * Tailwind CSS
     * Headless UI
     * Hero Icons
-
 * XHR
     * React-Query
     * Axios
-
 * Bundler
     * Vite
 * MISC
@@ -120,21 +123,18 @@ Além do desafio proposto com as duas telas, temos alguns diferenciais:
 
 Instalar dependências
 
-```
-npm install
-```
+`npm install`
 
+Após instalar, iniciar uma das builds:
 
-Após instalar, rodar uma das builds:
-
-- Dev
+* Development build
 
 `yarn dev` ou `npm run dev`
 
-- Production build
+* Production build
 
 `yarn build && yarn serve` ou `npm run build && npm run serve`
 
-- Docker (production)
+### Docker (production build)
 
 `yarn start` ou `npm run start`
