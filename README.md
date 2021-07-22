@@ -1,48 +1,26 @@
-# Front-End Challenge 🏅 2021
+# Front-End Challenge by Coodesh🏅 2021
 
 ## Introdução
 
-Este é um desafio para testar seus conhecimentos de Front-end;
+Este é desafio para testar os conhecimentos de Front-end;
 
-O objetivo é avaliar a sua forma de estruturação e autonomia em decisões para construir algo escalável utilizando um framework moderno javascript.
+O objetivo é avaliar a forma de estruturação e autonomia em decisões para construir algo escalável utilizando um framework moderno javascript.
 
-Você está livre para usar React.js ou Vue.js ou Angular 8+ no desenvolvimento da solução deste tech challenge.
-
-[SPOILER] As instruções de entrega e apresentação do challenge estão no final deste Readme (=
-
-## Case
+## Case & Objetivo
 
 A empresa Pharma Inc, está trabalhando em um projeto em colaboração com sua base de clientes para facilitar a gestão e visualização da informação dos seus pacientes de maneira simples e objetiva em um Dashboard onde podem listar, filtrar e expandir os dados disponíveis.
-O seu objetivo nesse projeto, é trabalhar no desenvolvimento do Front end que consumirá a API da empresa Pharma Inc seguindo os requisitos propostos neste desafio.
-
-## Recursos
-
-1. Estudar a documentação da REST API: https://randomuser.me/documentation
-2. Utilizar React.js ou Vue.js ou Angular 8+ para construir a solução do Challenge;
-3. Utilizar Frameworks CSS, recomendamos alguns como:
-
-      - Tailwind CSS: https://tailwindcss.com/
-      - Material UI: https://material-ui.com/
-      - Angular Material: https://material.angular.io/
-      - Bootstrap: https://getbootstrap.com/
-      - Bulma: https://bulma.io/
-
-4. Trabalhar em um [FORK](https://lab.coodesh.com/help/gitlab-basics/fork-project.md) deste repositório em seu usuário ou utilizar um repositório em seu github pessoal (não esqueça de colocar no readme a referência a este challenge);
-
-
-## Lista de Pacientes
-
+O objetivo nesse projeto é trabalhar no desenvolvimento do Front end que consumirá a API da empresa Pharma Inc seguindo os requisitos propostos neste desafio.
 A tela inicial do projeto será um lista de pacientes que deverá conter um buscador para facilitar filtrar todos os que são exibidos na lista, proposta:
 
 ![List users](assets/list.png)
 
 Para obter os dados, utilizaremos a API do Random User:
 
-- https://randomuser.me/api/
+* https://randomuser.me/api/
 
 Exemplo da resposta:
 
-```json
+``` json
 {
    "results": [
        {
@@ -65,8 +43,8 @@ Exemplo da resposta:
 
 Além de realizar a request, devemos aplicar alguns filtros na API:
 
-- Limitar em 50 resultados por request
-- Adicionar o parâmetro de paginação para controlar o `Loading more`
+* Limitar em 50 resultados por request
+* Adicionar o parâmetro de paginação para controlar o `Loading more`
 
 ### Visualizar paciente
 
@@ -76,59 +54,87 @@ Na coluna de ações da tabela, existe o botão visualizar para expandir os dado
 
 Devemos exibir os seguintes campos do paciente:
 
-- Imagem
-- Nome completo
-- Email
-- Gênero
-- Data de nascimento
-- Telefone
-- Nacionalidade
-- Endereço
-- ID (Número de identificação)
+* Imagem
+* Nome completo
+* Email
+* Gênero
+* Data de nascimento
+* Telefone
+* Nacionalidade
+* Endereço
+* ID (Número de identificação)
 
-## Extras
-
+Extras
 Além do desafio proposto com as duas telas, temos alguns diferenciais:
 
-- **Diferencial 1** Adicionar um filtro por Gênero na tabela;
-- **Diferencial 2** Configurar o buscador para poder filtrar por nome e nacionalidade;
-- **Diferencial 3** Adicionar o paginador rota para facilitar compartilhar o link e manter a posição na lista;
-- **Diferencial 4** Escrever Unit Tests ou E2E Test na Lista de Pacientes. Escolher a melhor abordagem e biblioteca;
-- **Diferencial 5** Configurar Docker no Projeto para facilitar o Deploy da equipe de DevOps;
+* **Diferencial 1** Adicionar um filtro por Gênero na tabela;
+* **Diferencial 2** Configurar o buscador para poder filtrar por nome e nacionalidade;
+* **Diferencial 3** Adicionar o paginador rota para facilitar compartilhar o link e manter a posição na lista;
+* **Diferencial 4** Escrever Unit Tests ou E2E Test na Lista de Pacientes. Escolher a melhor abordagem e biblioteca;
+* **Diferencial 5** Configurar Docker no Projeto para facilitar o Deploy da equipe de DevOps;
 
-## Readme do Repositório
+## Proposta
 
-- Deve conter o título do projeto
-- Uma descrição sobre o projeto em frase
-- Deve conter uma lista com linguagem, framework e/ou tecnologias usadas
-- Como instalar e usar o projeto (instruções)
-- Não esqueça o [.gitignore](https://www.toptal.com/developers/gitignore)
-- Se está usando github pessoal, referencie que é um challenge by coodesh 
+### Tela inicial
+![Homepage](assets/previews/home.png)
 
-## Finalização e Instruções para a Apresentação
+### Ver usuário
+![View Person](assets/previews/view-person.png)
 
-Avisar sobre a finalização e enviar para correção.
+### Filtros
+![Filters](assets/previews/filters.png)
 
-1. Confira se respondeu o Scorecard Front-end;
-2. Verique se o Readme está bom e faça o commit final em seu repositório;
-3. Acesse: [https://coodesh.com/review-challenge](https://coodesh.com/review-challenge);
-4. Coloque seu nome completo; 
-5. Coloque seu e-mail;
-6. Adicione o repositório com a sua solução;
-7. Confira a vaga desejada;
+### Primeiro load da página inicial
+![Loading](assets/previews/loading-list.png)
 
-![Solicitar Correção](https://res.cloudinary.com/coodesh/image/upload/v1612571243/coodesh-teams/challenges/repo.gif)
+### Load de uma rota (não cacheada)
+![loading more](assets/previews/on-route-change.png)
 
-8. Envie e aguarde as instruções para apresentação da sua solução
+### Background load
+![background loading](assets/previews/background-fetch.png)
 
-## Instruções para se preparar para a Apresentação:
+## Tech stack
 
-1. Aguarde o e-mail com as instruções de apresentação 
-2. Enquanto isso, crie uma conta na plataforma: https://www.loom.com/ e instale o Desktop App ou Extensão no Chrome: https://www.loom.com/download 
-3. DICA: Será necessário compartilhar a tela durante a gravação ou vídeo chamada. Deixe todos os projetos de solução previamente abertos em seu computador antes de iniciar a gravação ou chamanda de vídeo. Ambientes configurados e prontos para rodar.
-4. Prepara-se pois você será questionado sobre cada etapa e decisão do Challenge. Prepare uma lista de perguntas, dúvidas, sugestões de melhorias e feedbacks (caso tenha).
+* Framework
+    * React
+    * React-Router-DOM
 
-## Suporte
+* Style
+    * Tailwind CSS
+    * Headless UI
+    * Hero Icons
 
-Use o nosso canal no slack: http://bit.ly/32CuOMy para tirar dúvidas sobre o processo ou envie um e-mail para contato@coodesh.com.
+* XHR
+    * React-Query
+    * Axios
 
+* Bundler
+    * Vite
+* MISC
+    * Typescript
+    * Prettier
+    * Eslint
+    * React-Debounce-Input
+
+## Instruções
+
+Instalar dependências
+
+```
+npm install
+```
+
+
+Após instalar, rodar uma das builds:
+
+- Dev
+
+`yarn dev` ou `npm run dev`
+
+- Production build
+
+`yarn build && yarn serve` ou `npm run build && npm run serve`
+
+- Docker (production)
+
+`yarn start` ou `npm run start`
