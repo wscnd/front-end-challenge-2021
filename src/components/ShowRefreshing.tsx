@@ -21,9 +21,9 @@ const ShowRefreshing: React.FunctionComponent<ShowRefreshingProps> = ({
       leaveFrom="transform opacity-100 "
       leaveTo="transform opacity-0 "
     >
-      <div className="flex justify-center text-secondary">
+      <div className="flex justify-center text-primary">
         <div className="flex-shrink-0 animate-spin-h">
-          <Icon className="h-8 w-8" aria-hidden="true" />
+          <Icon className="h-10 w-10" aria-hidden="true" />
         </div>
       </div>
     </Transition>

@@ -117,7 +117,9 @@ const Home = () => {
               <div className="fixed flex items-center pointer-events-none bottom-6 right-6">
                 <ShowRefreshing
                   Icon={RefreshIcon}
-                  show={query.isFetching && !query.isLoading}
+                  show={
+                    query.isFetching && !query.isLoading && query.isFetched
+                  }
                 />
               </div>
 
@@ -134,22 +136,30 @@ const Home = () => {
               />
 
               <section>
-                {query.data ? (
-                  <SortContextProvider>
-                    <WithFilteredPersonList
-                      pages={query.data}
-                      filters={{
-                        gender: selectedGender.value,
-                        nationality: selectNationality.value,
-                        search: search,
-                      }}
-                    >
-                      {({ personList }) => (
-                        <PersonList personList={personList} />
-                      )}
-                    </WithFilteredPersonList>
-                  </SortContextProvider>
-                ) : null}
+                <ShowLoading
+                  Icon={RefreshIcon}
+                  show={
+                    query.isFetching && !query.isLoading && !query.isFetched
+                  }
+                  text={'Loading more...'}
+                >
+                  {query.data ? (
+                    <SortContextProvider>
+                      <WithFilteredPersonList
+                        pages={query.data}
+                        filters={{
+                          gender: selectedGender.value,
+                          nationality: selectNationality.value,
+                          search: search,
+                        }}
+                      >
+                        {({ personList }) => (
+                          <PersonList personList={personList} />
+                        )}
+                      </WithFilteredPersonList>
+                    </SortContextProvider>
+                  ) : null}
+                </ShowLoading>
                 <ShowLoading
                   Icon={RefreshIcon}
                   show={query.isLoading}
