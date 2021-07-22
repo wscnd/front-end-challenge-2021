@@ -9,7 +9,5 @@ services:
       context: .
       dockerfile: dockerfile
     tty: true
-    volumes:
-      - .:/home/node
     ports:
       - 5010:5010
