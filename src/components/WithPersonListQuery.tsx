@@ -22,11 +22,21 @@ const WithPersonListQuery: React.FunctionComponent<WithPersonListQueryProps> =
     const history = useHistory();
 
     React.useEffect(() => {
-      history.replace({
-        pathname: '/',
-        search: `?page=${verifyPageNumber(page)}`,
+      const unlisten = history.listen(async () => {
+        window.scrollTo(0, 0);
       });
-    }, [history, page, pageFromUrlParam, verifyPageNumber]);
+      return unlisten;
+    }, [history.action, history]);
+
+    React.useEffect(() => {
+      const currentPageNumber = verifyPageNumber(pageFromUrlParam);
+      if (currentPageNumber !== '1') {
+        history.replace({
+          pathname: '/',
+          search: `?page=${verifyPageNumber(pageFromUrlParam)}`,
+        });
+      }
+    }, [history, verifyPageNumber, pageFromUrlParam]);
 
     /**
      * NOTE: PersonQuery Related
