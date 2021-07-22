@@ -10,7 +10,7 @@ import { ShowRefreshing } from '../components/ShowRefreshing';
 import { WithFilteredPersonList } from '../components/WithFilteredPersonList';
 import { WithPersonListQuery } from '../components/WithPersonListQuery';
 import { SortContextProvider } from '../context/SortContext';
-import { usePageNumberFromParams } from '../hooks/usePageNumberFromParams';
+import { useCurrentPageFromParams } from '../hooks/useCurrentPageFromParams';
 import { useSearchParams } from '../hooks/useSearchParams';
 
 const Home = () => {
@@ -19,14 +19,14 @@ const Home = () => {
    **/
   const page = useSearchParams('page').page ?? '1';
 
-  const maxPageNumber = React.useState(5)[0];
+  const maxPages = React.useState(5)[0];
 
-  const { pageFromUrlParam, setPageFromUrlParam, verifyPageNumber } =
-    usePageNumberFromParams(page, maxPageNumber);
+  const { currentPage, setCurrentPage, validateCurrentPage } =
+    useCurrentPageFromParams(page, maxPages);
 
   React.useEffect(() => {
-    setPageFromUrlParam(verifyPageNumber(page));
-  }, [maxPageNumber, page, verifyPageNumber, setPageFromUrlParam]);
+    setCurrentPage(validateCurrentPage(page));
+  }, [maxPages, page, validateCurrentPage, setCurrentPage]);
 
   /**
    * NOTE: Gender options
@@ -110,16 +110,14 @@ const Home = () => {
         </div>
       </section>
 
-      <WithPersonListQuery maxPageNumber={maxPageNumber}>
+      <WithPersonListQuery maxPages={maxPages}>
         {({ query, actions }) => {
           return (
             <div className="mb-6">
               <div className="fixed flex items-center pointer-events-none bottom-6 right-6">
                 <ShowRefreshing
                   Icon={RefreshIcon}
-                  show={
-                    query.isFetching && !query.isLoading && query.isFetched
-                  }
+                  show={query.isFetching && !query.isLoading && query.isFetched}
                 />
               </div>
 
@@ -171,9 +169,9 @@ const Home = () => {
                 {!query.isLoading ? (
                   <React.Fragment>
                     <Pagination
-                      currentPage={pageFromUrlParam}
+                      currentPage={currentPage}
                       actions={actions}
-                      maxPages={maxPageNumber}
+                      maxPages={maxPages}
                       isFetching={query.isFetching || query.isLoading} // NOTE: not being used
                     />
                   </React.Fragment>

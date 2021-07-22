@@ -1,7 +1,7 @@
 import * as React from 'react';
 
-const usePageNumberFromParams = (page: string, maxPageNumber: number) => {
-  const verifyPageNumber = React.useCallback(
+const useCurrentPageFromParams = (page: string, maxPageNumber: number) => {
+  const validateCurrentPage = React.useCallback(
     (page: string) => {
       const pageToNumber = Number(page);
       if (pageToNumber < 1 || Number.isNaN(pageToNumber))
@@ -12,10 +12,10 @@ const usePageNumberFromParams = (page: string, maxPageNumber: number) => {
     [maxPageNumber],
   );
 
-  const [pageFromUrlParam, setPageFromUrlParam] = React.useState(() => {
-    return verifyPageNumber(page);
+  const [currentPage, setCurrentPage] = React.useState(() => {
+    return validateCurrentPage(page);
   });
-  return { pageFromUrlParam, setPageFromUrlParam, verifyPageNumber };
+  return { currentPage, setCurrentPage, validateCurrentPage   };
 };
 
-export { usePageNumberFromParams };
+export { useCurrentPageFromParams };
