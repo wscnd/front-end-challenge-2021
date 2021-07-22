@@ -1,10 +1,10 @@
 import { RefreshIcon, SearchIcon } from '@heroicons/react/solid';
 import * as React from 'react';
 import { DebounceInput } from 'react-debounce-input';
-import { useQuery, useQueryClient } from 'react-query';
 import { Pagination } from '../components/Pagination';
 import { PersonList } from '../components/PersonList';
 import { Select } from '../components/Select';
+import { SetOptions } from '../components/SetOptions';
 import { ShowLoading } from '../components/ShowLoading';
 import { ShowRefreshing } from '../components/ShowRefreshing';
 import { WithFilteredPersonList } from '../components/WithFilteredPersonList';
@@ -12,8 +12,6 @@ import { WithPersonListQuery } from '../components/WithPersonListQuery';
 import { SortContextProvider } from '../context/SortContext';
 import { usePageNumberFromParams } from '../hooks/usePageNumberFromParams';
 import { useSearchParams } from '../hooks/useSearchParams';
-import type { Person } from '../lib/types/Person';
-import type { QueryResult } from '../lib/types/QueryResult';
 
 const Home = () => {
   /**
@@ -33,51 +31,29 @@ const Home = () => {
   /**
    * NOTE: Gender options
    **/
-  const genderOptions = React.useState(() => [
-    { id: 1, name: 'Male', value: 'male' },
-    { id: 2, name: 'Female', value: 'female' },
-    { id: 3, name: 'Any', value: '' },
-  ])[0];
 
-  const [selectedGender, setSelectedGender] = React.useState(genderOptions[2]);
+  const [genderOptions, setGenderOptions] = React.useState([
+    {
+      name: 'Any',
+      value: '',
+      id: 0,
+    },
+  ]);
+  const [selectedGender, setSelectedGender] = React.useState(genderOptions[0]);
 
   /**
    * NOTE: Nationality options
    * this is intense and probably overkill
    * it updates on every fetch to get a new list of nationalities that are returned by the query
    **/
-  const queryClient = useQuery<QueryResult>(['person', pageFromUrlParam]);
-  const client = useQueryClient();
-  const nationalityOptions = React.useMemo(() => {
-    const anyNationality = { name: 'Any', value: '', id: 0 };
-    let history;
 
-    if (queryClient.isFetched) {
-      history = Object.values(
-        client
-          .getQueryCache()
-          .findAll('person')
-          .map((query) => query?.state?.data as QueryResult)
-          .filter(Boolean)
-          .reduce(
-            (store: Person[], current) => [...store, ...current.results],
-            [],
-          )
-          .reduce(
-            (store, person) => ({
-              ...store,
-              [person.nat]: {
-                name: person.nat,
-                value: person.nat,
-                id: person.nat,
-              },
-            }),
-            { any: anyNationality },
-          ),
-      ).map((value, index) => ({ ...value, id: index }));
-    }
-    return history || [anyNationality];
-  }, [client, queryClient.isFetched]);
+  const [nationalityOptions, setNationalityOptions] = React.useState([
+    {
+      name: 'Any',
+      value: '',
+      id: 0,
+    },
+  ]);
 
   const [selectNationality, setSelectedNationality] = React.useState(
     nationalityOptions[0],
@@ -144,6 +120,18 @@ const Home = () => {
                   show={query.isFetching && !query.isLoading}
                 />
               </div>
+
+              {/* Set FilterOptions to the Table */}
+              <SetOptions
+                query={query}
+                setOptions={setGenderOptions}
+                optionKey="gender"
+              />
+              <SetOptions
+                query={query}
+                setOptions={setNationalityOptions}
+                optionKey="nat"
+              />
 
               <section>
                 {query.data ? (
