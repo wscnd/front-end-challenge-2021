@@ -8,7 +8,7 @@ import type { WithPersonListQueryType } from '../lib/types/WithPersonListQueryTy
 
 type PaginationProps = {
   currentPage: string | null;
-  actions: WithPersonListQueryType['actions'];
+  actions: WithPersonListQueryType['queryActions'];
   maxPages: number;
   isFetching: boolean;
 };

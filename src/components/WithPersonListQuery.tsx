@@ -83,7 +83,7 @@ const WithPersonListQuery: React.FunctionComponent<WithPersonListQueryProps> =
 
     return children({
       query: personQuery,
-      actions: { fetchNextPage, fetchPreviousPage, fetchPage },
+      queryActions: { fetchNextPage, fetchPreviousPage, fetchPage },
     });
   };
 

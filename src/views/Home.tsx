@@ -111,7 +111,7 @@ const Home = () => {
 
       {/* Everything below this uses the PersonQuery */}
       <WithPersonListQuery maxPages={maxPages}>
-        {({ query, actions }) => {
+        {({ query, queryActions }) => {
           return (
             <div className="mb-6">
               <div className="fixed flex items-center pointer-events-none bottom-6 right-6">
@@ -170,7 +170,7 @@ const Home = () => {
                   <React.Fragment>
                     <Pagination
                       currentPage={currentPage}
-                      actions={actions}
+                      actions={queryActions}
                       maxPages={maxPages}
                       isFetching={query.isFetching || query.isLoading} // NOTE: not being used
                     />
