@@ -1,6 +1,7 @@
 import * as React from 'react';
 import type { Person } from '../lib/types/Person';
-import { DisplayPerson } from './DisplayPerson';
+import { Modal } from './Modal';
+import { ModalPersonDetails } from './ModalPersonDetail';
 import { Table, TableBody } from './Table';
 
 type PersonListProps = React.FunctionComponent<{
@@ -22,9 +23,10 @@ const PersonList: PersonListProps = ({ personList }) => {
         <TableBody actions={{ view: viewAction }} personList={personList} />
       </Table>
       {selectedPersonInfo ? (
-        <DisplayPerson
+        <Modal<Person>
+          Component={ModalPersonDetails}
+          content={selectedPersonInfo}
           openState={[viewPerson, setViewPerson]}
-          person={selectedPersonInfo}
         />
       ) : null}
     </React.Fragment>
