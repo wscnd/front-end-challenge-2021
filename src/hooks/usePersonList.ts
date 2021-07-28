@@ -69,13 +69,19 @@ export const usePersonQueryWithConfig = (
 
       const promise: Promise<QueryResult> & {
         cancel?: { (): void };
-      } = new Promise((res) => setTimeout(res, 1000)).then(async () => {
-        return fetchPersonWithOptions({
-          fetchOptions: newFetchOptions,
-          queryKey,
-          pageParam,
-        });
+      } = fetchPersonWithOptions({
+        fetchOptions: newFetchOptions,
+        queryKey,
+        pageParam,
       });
+      // NOTE: query cancellation
+      // new Promise((res) => setTimeout(res, 1000)).then(async () => {
+      //   return fetchPersonWithOptions({
+      //     fetchOptions: newFetchOptions,
+      //     queryKey,
+      //     pageParam,
+      //   });
+      // });
 
       promise.cancel = () => {
         source.cancel('Query was cancelled by react-query');
